@@ -1,0 +1,6 @@
+#Load and show an image with Pillow
+from PIL import Image
+#Load the image
+img = Image.open('C:/Users/milas/AppData/Local/Temp/Temp1_kaarten.zip/kaarten/greendiamondempty1.gif')
+#show the image
+img.show()
