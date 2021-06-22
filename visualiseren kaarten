@@ -1,5 +1,10 @@
+#Load and show an image with Pillow
 from PIL import Image
 import os
-os.chdir('C:/Users/milas/AppData/Local/Temp/Temp1_kaarten.zip/kaarten')
-img = Image.open('greendiamondempty1.gif')
+os.chdir('C:/Users\milas\Documents\kaarten')
+#os.chdir('C:/Users/milas/AppData/Local/Temp/Temp1_kaarten.zip/kaarten')
+bovenste_kaart=alle_kaarten[-1]
+k=''.join(bovenste_kaart)
+print(k)
+img = Image.open(k+'.gif')
 img.show()
