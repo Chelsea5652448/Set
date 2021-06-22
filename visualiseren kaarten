@@ -1,10 +1,7 @@
-#Load and show an image with Pillow
 from PIL import Image
 import os
-os.chdir('C:/Users\milas\Documents\kaarten')
-#os.chdir('C:/Users/milas/AppData/Local/Temp/Temp1_kaarten.zip/kaarten')
+os.chdir('C:/Users\milas\Documents\kaarten')   #hier moet je je eigen document naam naar kopieren, anders kan python het goede pad niet volgen
 bovenste_kaart=alle_kaarten[-1]
-k=''.join(bovenste_kaart)
-print(k)
-img = Image.open(k+'.gif')
-img.show()
+zin_van_kaart=''.join(bovenste_kaart)   #we nemen de bovenste kaart, en maken daar een string van inplaats van een lijst
+img = Image.open(k+'.gif') 
+img.show()   #laat de bovenste kaart zien
