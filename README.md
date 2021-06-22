@@ -15,4 +15,6 @@ Te doen:
 *win/verlies programeren.
 
 Vragen voor donderdag:
-Hoe roep je bestanden/figuren aan in python?
+Hoe kunnen we de kaarten beter visualiseren?
+hoe kun je locatie instellen zodat die voor iedereen hetzelfde is (afbeeldingen)
+Hoe kunnen we het probleem van work directory omzeilen? Aangezien die anders is op een andere computer
