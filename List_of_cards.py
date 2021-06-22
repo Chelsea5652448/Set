@@ -1,3 +1,5 @@
+import random
+random.seed(1)   #een vaste seed voor makkelijker debuggen Deze later verwijderen!!!!!
 alle_sets=[]   #wordt de lijst met alle 81 kaarten 
 kleur=['green', 'purple', 'red']
 vorm=['diamond','oval', 'squigle']
@@ -10,3 +12,4 @@ for i in kleur:
             for l in hoeveelheid:
                 set_kaarten=[i,j,k,l]
                 alle_sets.append(set_kaarten)
+random.shuffle(alle)
