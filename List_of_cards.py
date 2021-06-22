@@ -1,15 +1,15 @@
 import random
 random.seed(1)   #een vaste seed voor makkelijker debuggen Deze later verwijderen!!!!!
-alle_sets=[]   #wordt de lijst met alle 81 kaarten 
+alle_kaarten=[]   #wordt de lijst met alle 81 kaarten 
 kleur=['green', 'purple', 'red']
 vorm=['diamond','oval', 'squigle']
-binnenkant=['empty', 'shaded','filled']
+inhoud=['empty', 'shaded','filled']
 hoeveelheid=[1,2,3]
-set_kaarten=[]   #wordt een lijst met telkens 1 kaart erin 
+kaart=[]   #wordt een lijst met telkens 1 kaart erin 
 for i in kleur:
     for j in vorm:
         for k in binnenkant:
-            for l in hoeveelheid:
-                set_kaarten=[i,j,k,l]
-                alle_sets.append(set_kaarten)
-random.shuffle(alle)
+            for l in inhoud:
+                kaart=[i,j,k,l]
+                alle_kaarten.append(kaart)
+random.shuffle(alle_kaarten)   #zet de kaarten in een random volgorde in de lijst, is vergelijkbaar met schudden van een stapel kaarten   
