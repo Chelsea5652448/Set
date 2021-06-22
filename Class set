@@ -1,0 +1,25 @@
+class Set:
+    def __init__(self,kaart=['red','oval','empty',1]):
+        self.kleur=kaart[0]
+        self.vorm=kaart[1]
+        self.inhoud=kaart[2]
+        self.hoeveelheid=kaart[3]
+                                                                     #om te controleren of kaarten verschillend zijn kunnen we != gebruiken.
+    def __ne__(self,other):
+        if self.kleur==other.kleur or self.vorm==other.vorm or self.inhoud==other.inhoud or self.hoeveelheid==other.hoeveelheid:
+            return False
+        else:
+            return True
+                                                                     #om te controleren of kleur,vorm,inhoud,hoeveelheid hetzelfde zijn,
+                                                                     #kunnen we respectievelijk nu <,<=,>,>= gebruiken.
+    def __lt__(self,other):
+        return self.kleur==other.kleur
+    
+    def __le__(self,other):
+        return self.vorm==other.vorm
+    
+    def __gt__(self,other):
+        return self.inhoud==other.inhoud
+    
+    def __ge__(self,other):
+        return self.hoeveelheid==other.hoeveelheid
