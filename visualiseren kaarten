@@ -1,6 +1,5 @@
-#Load and show an image with Pillow
 from PIL import Image
-#Load the image
-img = Image.open('C:/Users/milas/AppData/Local/Temp/Temp1_kaarten.zip/kaarten/greendiamondempty1.gif')
-#show the image
+import os
+os.chdir('C:/Users/milas/AppData/Local/Temp/Temp1_kaarten.zip/kaarten')
+img = Image.open('greendiamondempty1.gif')
 img.show()
