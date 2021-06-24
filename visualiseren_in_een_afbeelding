@@ -1,0 +1,77 @@
+import numpy as np
+import PIL
+from PIL import Image
+import os
+os.chdir('C:/Users\milas\Documents\kaarten')
+
+bovenste_kaart=alle_kaarten[-1]
+a=''.join(bovenste_kaart)+'.gif'
+bovenste_kaart1=alle_kaarten[-2]
+b=''.join(bovenste_kaart)+'.gif'
+bovenste_kaart2=alle_kaarten[-3]
+c=''.join(bovenste_kaart)+'.gif'
+bovenste_kaart3=alle_kaarten[-4]
+d=''.join(bovenste_kaart)+'.gif'
+bovenste_kaart4=alle_kaarten[-5]
+e=''.join(bovenste_kaart)+'.gif'
+bovenste_kaart5=alle_kaarten[-6]
+f=''.join(bovenste_kaart)+'.gif'
+bovenste_kaart6=alle_kaarten[-7]
+g=''.join(bovenste_kaart)+'.gif'
+bovenste_kaart7=alle_kaarten[-8]
+h=''.join(bovenste_kaart)+'.gif'
+bovenste_kaart8=alle_kaarten[-9]
+i=''.join(bovenste_kaart)+'.gif'
+bovenste_kaart9=alle_kaarten[-10]
+j=''.join(bovenste_kaart)+'.gif'
+bovenste_kaart10=alle_kaarten[-11]
+k=''.join(bovenste_kaart)+'.gif'
+bovenste_kaart11=alle_kaarten[-12]
+l=''.join(bovenste_kaart)+'.gif'
+
+list_im = [a, b, c]
+imgs    = [ PIL.Image.open(i) for i in list_im ]
+# kiest kleinste afbeelding en maakt alle afbeeldingen die maat
+min_shape = sorted( [(np.sum(i.size), i.size ) for i in imgs])[0][1]
+imgs_comb = np.hstack( (np.asarray( i.resize(min_shape) ) for i in imgs ) )
+
+imgs_comb = PIL.Image.fromarray( imgs_comb)
+imgs_comb.save('horizontaal.gif')    
+
+list_im = [d, e, f]
+imgs    = [ PIL.Image.open(i) for i in list_im ]
+# kiest kleinste afbeelding en maakt alle afbeeldingen die maat
+min_shape = sorted( [(np.sum(i.size), i.size ) for i in imgs])[0][1]
+imgs_comb = np.hstack( (np.asarray( i.resize(min_shape) ) for i in imgs ) )
+
+imgs_comb = PIL.Image.fromarray( imgs_comb)
+imgs_comb.save('horizontaal1.gif')    
+
+list_im = [g, h, i]
+imgs    = [ PIL.Image.open(i) for i in list_im ]
+# kiest kleinste afbeelding en maakt alle afbeeldingen die maat
+min_shape = sorted( [(np.sum(i.size), i.size ) for i in imgs])[0][1]
+imgs_comb = np.hstack( (np.asarray( i.resize(min_shape) ) for i in imgs ) )
+
+imgs_comb = PIL.Image.fromarray( imgs_comb)
+imgs_comb.save('horizontaal2.gif')    
+
+list_im = [j, k, l]
+imgs    = [ PIL.Image.open(i) for i in list_im ]
+# kiest kleinste afbeelding en maakt alle afbeeldingen die maat
+min_shape = sorted( [(np.sum(i.size), i.size ) for i in imgs])[0][1]
+imgs_comb = np.hstack( (np.asarray( i.resize(min_shape) ) for i in imgs ) )
+
+imgs_comb = PIL.Image.fromarray( imgs_comb)
+imgs_comb.save( 'horizontaal3.gif')    
+
+list_im = ['horizontaal.gif', 'horizontaal1.gif', 'horizontaal2.gif', 'horizontaal3.gif']
+imgs    = [ PIL.Image.open(i) for i in list_im ]
+# kiest kleinste afbeelding en maakt alle afbeeldingen die maat
+min_shape = sorted( [(np.sum(i.size), i.size ) for i in imgs])[0][1]
+imgs_comb = np.hstack( (np.asarray( i.resize(min_shape) ) for i in imgs ) )
+
+imgs_comb = np.vstack( (np.asarray( i.resize(min_shape) ) for i in imgs ) )
+imgs_comb = PIL.Image.fromarray( imgs_comb)
+imgs_comb.save('verticaal.gif')
+imgs_comb.show()
