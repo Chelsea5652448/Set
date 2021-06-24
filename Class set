@@ -4,12 +4,6 @@ class Set:
         self.vorm=kaart[1]
         self.inhoud=kaart[2]
         self.hoeveelheid=kaart[3]
-                                                                     #om te controleren of kaarten verschillend zijn kunnen we != gebruiken.
-    def __ne__(self,other):
-        if self.kleur==other.kleur or self.vorm==other.vorm or self.inhoud==other.inhoud or self.hoeveelheid==other.hoeveelheid:
-            return False
-        else:
-            return True
                                                                      #om te controleren of kleur,vorm,inhoud,hoeveelheid hetzelfde zijn,
                                                                      #kunnen we respectievelijk nu <,<=,>,>= gebruiken.
     def __lt__(self,other):
