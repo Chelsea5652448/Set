@@ -1,0 +1,26 @@
+#De speler moet nu een gevonden set invoeren zodat het algoritme kan checken of met klopt.
+#De speler voert de drie nummers in van de kaarten waarvan de speler denkt dat het een set is.
+#De enige manier van invoeren van een mogelijke set is als volgt: 1,2,3 
+#Met op de plaatsen 1 2 en 3 willekeurig de cijfer van de 3 kaarten die de speler gekozen heeft.
+invoer_speler = input("Vul hier je gevonden set in (als nummers van de kaarten met komma's ertussen zonder spaties'):")
+invoer_speler_list= invoer_speler.split(",")
+mogelijke_set=[]
+for i in range(len(invoer_speler_list)):
+    mogelijke_set.append(int(invoer_speler_list[i]))
+lijst_mogelijke_set=[]
+for j in mogelijke_set:
+    lijst_mogelijke_set.append(kaarten_op_tafel[j-1])
+
+#print(check_set(Set(lijst_mogelijke_set[0]), Set(lijst_mogelijke_set[1]), Set(lijst_mogelijke_set[2])))
+
+if check_set(Set(lijst_mogelijke_set[0]), Set(lijst_mogelijke_set[1]), Set(lijst_mogelijke_set[2])) == True:
+    print("Je hebt een set gevonden!")
+    #Verwijder de kaarten uit de lijst met kaarten die op tafel liggen.
+    for j in mogelijke_set:
+        kaarten_op_tafel.pop(j-1)
+    #Voeg 3 nieuwe kaarten toe aan de lijst met kaarten op tafel.
+    for b in range(3):
+        kaarten_op_tafel.append(alle_kaarten[-1])
+        alle_kaarten.pop()
+        
+print(kaarten_op_tafel)
