@@ -30,38 +30,38 @@ bovenste_kaart11=alle_kaarten[-12]
 l=''.join(bovenste_kaart)+'.gif'
 
 list_im = [a, b, c]
-imgs    = [ PIL.Image.open(i) for i in list_im ]
+imgs = [ PIL.Image.open(i) for i in list_im ]
 imgs_comb = np.hstack(i for i in imgs )
 
 imgs_comb = PIL.Image.fromarray( imgs_comb)
 imgs_comb.save('horizontaal.gif')    
 
-list_im = [d, e, f]
-imgs    = [ PIL.Image.open(i) for i in list_im ]
-imgs_comb = np.hstack(i for i in imgs )
+list_im1 = [d, e, f]
+imgs1 = [ PIL.Image.open(i) for i in list_im1 ]
+imgs_comb1 = np.hstack(i for i in imgs1 )
 
-imgs_comb = PIL.Image.fromarray( imgs_comb)
-imgs_comb.save('horizontaal1.gif')    
+imgs_comb1 = PIL.Image.fromarray( imgs_comb1)
+imgs_comb1.save('horizontaal1.gif')    
 
-list_im = [g, h, i]
-imgs    = [ PIL.Image.open(i) for i in list_im ]
-imgs_comb = np.hstack(i for i in imgs )
+list_im2 = [g, h, i]
+imgs2 = [ PIL.Image.open(i) for i in list_im2 ]
+imgs_comb2 = np.hstack(i for i in imgs2 )
 
-imgs_comb = PIL.Image.fromarray( imgs_comb)
-imgs_comb.save('horizontaal2.gif')    
+imgs_comb2 = PIL.Image.fromarray( imgs_comb2)
+imgs_comb2.save('horizontaal2.gif')    
 
-list_im = [j, k, l]
-imgs    = [ PIL.Image.open(i) for i in list_im ]
-imgs_comb = np.hstack(i for i in imgs )
+list_im3 = [j, k, l]
+imgs3 = [ PIL.Image.open(i) for i in list_im3 ]
+imgs_comb3 = np.hstack(i for i in imgs3 )
 
-imgs_comb = PIL.Image.fromarray( imgs_comb)
-imgs_comb.save( 'horizontaal3.gif')    
+imgs_comb3 = PIL.Image.fromarray( imgs_comb3)
+imgs_comb3.save( 'horizontaal3.gif')    
 
-list_im = ['horizontaal.gif', 'horizontaal1.gif', 'horizontaal2.gif', 'horizontaal3.gif']
-imgs    = [ PIL.Image.open(i) for i in list_im ]
-imgs_comb = np.hstack(i for i in imgs )
+list_im4 = ['horizontaal.gif', 'horizontaal1.gif', 'horizontaal2.gif', 'horizontaal3.gif']
+imgs4 = [ PIL.Image.open(i) for i in list_im4 ]
+imgs_comb4 = np.hstack(i for i in imgs4 )
 
-imgs_comb = np.vstack( i for i in imgs )
-imgs_comb = PIL.Image.fromarray( imgs_comb)
-imgs_comb.save('verticaal.gif')
-imgs_comb.show()
+imgs_comb4 = np.vstack( i for i in imgs4 )
+imgs_comb4 = PIL.Image.fromarray( imgs_comb4)
+imgs_comb4.save('verticaal.gif')
+imgs_comb4.show()
