@@ -7,61 +7,61 @@ os.chdir('C:/Users\milas\Documents\kaarten')
 bovenste_kaart=alle_kaarten[-1]
 a=''.join(bovenste_kaart)+'.gif'
 bovenste_kaart1=alle_kaarten[-2]
-b=''.join(bovenste_kaart)+'.gif'
+b=''.join(bovenste_kaart1)+'.gif'
 bovenste_kaart2=alle_kaarten[-3]
-c=''.join(bovenste_kaart)+'.gif'
+c=''.join(bovenste_kaart2)+'.gif'
 bovenste_kaart3=alle_kaarten[-4]
-d=''.join(bovenste_kaart)+'.gif'
+d=''.join(bovenste_kaart3)+'.gif'
 bovenste_kaart4=alle_kaarten[-5]
-e=''.join(bovenste_kaart)+'.gif'
+e=''.join(bovenste_kaart4)+'.gif'
 bovenste_kaart5=alle_kaarten[-6]
-f=''.join(bovenste_kaart)+'.gif'
+f=''.join(bovenste_kaart5)+'.gif'
 bovenste_kaart6=alle_kaarten[-7]
-g=''.join(bovenste_kaart)+'.gif'
+g=''.join(bovenste_kaart6)+'.gif'
 bovenste_kaart7=alle_kaarten[-8]
-h=''.join(bovenste_kaart)+'.gif'
+h=''.join(bovenste_kaart7)+'.gif'
 bovenste_kaart8=alle_kaarten[-9]
-i=''.join(bovenste_kaart)+'.gif'
+i=''.join(bovenste_kaart8)+'.gif'
 bovenste_kaart9=alle_kaarten[-10]
-j=''.join(bovenste_kaart)+'.gif'
+j=''.join(bovenste_kaart9)+'.gif'
 bovenste_kaart10=alle_kaarten[-11]
-k=''.join(bovenste_kaart)+'.gif'
+k=''.join(bovenste_kaart10)+'.gif'
 bovenste_kaart11=alle_kaarten[-12]
-l=''.join(bovenste_kaart)+'.gif'
+l=''.join(bovenste_kaart11)+'.gif'
 
-list_im = [a, b, c]
-imgs = [ PIL.Image.open(i) for i in list_im ]
-imgs_comb = np.hstack(i for i in imgs )
+list_im = [a,b,c]
+imgs = [Image.open(i) for i in list_im]
+imgs_comb = np.hstack(i for i in imgs)
 
-imgs_comb = PIL.Image.fromarray( imgs_comb)
+imgs_comb = Image.fromarray(imgs_comb)
 imgs_comb.save('horizontaal.gif')    
 
 list_im1 = [d, e, f]
-imgs1 = [ PIL.Image.open(i) for i in list_im1 ]
-imgs_comb1 = np.hstack(i for i in imgs1 )
+imgs1 = [Image.open(i) for i in list_im1]
+imgs_comb1 = np.hstack(i for i in imgs1)
 
-imgs_comb1 = PIL.Image.fromarray( imgs_comb1)
+imgs_comb1 = Image.fromarray(imgs_comb1)
 imgs_comb1.save('horizontaal1.gif')    
 
 list_im2 = [g, h, i]
-imgs2 = [ PIL.Image.open(i) for i in list_im2 ]
-imgs_comb2 = np.hstack(i for i in imgs2 )
+imgs2 = [Image.open(i) for i in list_im2]
+imgs_comb2 = np.hstack(i for i in imgs2)
 
-imgs_comb2 = PIL.Image.fromarray( imgs_comb2)
+imgs_comb2 = Image.fromarray(imgs_comb2)
 imgs_comb2.save('horizontaal2.gif')    
 
 list_im3 = [j, k, l]
-imgs3 = [ PIL.Image.open(i) for i in list_im3 ]
-imgs_comb3 = np.hstack(i for i in imgs3 )
+imgs3 = [Image.open(i) for i in list_im3]
+imgs_comb3 = np.hstack(i for i in imgs3)
 
-imgs_comb3 = PIL.Image.fromarray( imgs_comb3)
+imgs_comb3 = Image.fromarray(imgs_comb3)
 imgs_comb3.save( 'horizontaal3.gif')    
 
 list_im4 = ['horizontaal.gif', 'horizontaal1.gif', 'horizontaal2.gif', 'horizontaal3.gif']
-imgs4 = [ PIL.Image.open(i) for i in list_im4 ]
-imgs_comb4 = np.hstack(i for i in imgs4 )
+imgs4 = [Image.open(i) for i in list_im4]
+imgs_comb4 = np.hstack(i for i in imgs4)
 
-imgs_comb4 = np.vstack( i for i in imgs4 )
-imgs_comb4 = PIL.Image.fromarray( imgs_comb4)
+imgs_comb4 = np.vstack(i for i in imgs4)
+imgs_comb4 = Image.fromarray(imgs_comb4)
 imgs_comb4.save('verticaal.gif')
 imgs_comb4.show()
