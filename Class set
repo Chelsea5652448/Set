@@ -33,15 +33,13 @@ def check_set(card1,card2,card3):
             card2=Set(card2)
         if type(card3)==list:
             card3=Set(card3)
-    if card1<card2 and card2<card3:
-        return True
-    elif card1<=card2 and card2<=card3:
-        return True
-    elif card1>card2 and card2>card3:
-        return True
-    elif card1>=card2 and card2>=card3:
-        return True
-    elif card1!=card2 and card2!=card3 and card1!=card3:
-        return True
-    else:
+     if (not card1<=card2 and card2<=card3) or (not card3<=card2 and card1<=card2) or (not card1<=card2 and card1<=card3):
         return False
+    elif (not card1<card2 and card2<card3) or (not card3<card2 and card1<card2) or (not card1<card2 and card1<card3):
+        return False
+    elif (not card1>=card2 and card2>=card3) or (not card3>=card2 and card1>=card2) or (not card1>=card2 and card1>=card3):
+        return False
+    elif (not card1>card2 and card2>card3) or (not card3>card2 and card1>card2) or (not card1>card2 and card1>card3):
+        return False
+    else:
+        return True
