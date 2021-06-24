@@ -1,1 +1,15 @@
-
+#Een timer maken voor het spel.
+#de moeilijkheidsgraad is een placehoder!!!!!!!!!
+moeilijkheidsgraad=5
+countdown=0
+check=0
+import time
+start=time.time()
+while time.time()-start<moeilijkheidsgraad:
+#het toevoegen van een countdown om de speler te laten weten hoeveel tijd over is. 
+    countdown=moeilijkheidsgraad-(time.time()-start)//1
+    if countdown!=check:
+        #deze print statement vervangen met hoe we onze timer visualiseren
+        print (int(countdown))
+    check=countdown
+print('Done')
