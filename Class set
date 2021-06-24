@@ -23,3 +23,25 @@ class Set:
     
     def __ge__(self,other):
         return self.hoeveelheid==other.hoeveelheid
+#merk op dat de invoer Altijd!!!!! class set moet hebben.
+def check_set(card1,card2,card3):
+    if type(card1)==list or type(card2)==list or type(card3)==list:
+        print('Je moet de klassen nog aanpassen.')
+        if type(card1)==list():
+            card1=Set(card1)
+        if type(card2)==list:
+            card2=Set(card2)
+        if type(card3)==list:
+            card3=Set(card3)
+    if card1<card2 and card2<card3:
+        return True
+    elif card1<=card2 and card2<=card3:
+        return True
+    elif card1>card2 and card2>card3:
+        return True
+    elif card1>=card2 and card2>=card3:
+        return True
+    elif card1!=card2 and card2!=card3 and card1!=card3:
+        return True
+    else:
+        return False
