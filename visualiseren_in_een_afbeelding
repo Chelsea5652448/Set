@@ -31,47 +31,37 @@ l=''.join(bovenste_kaart)+'.gif'
 
 list_im = [a, b, c]
 imgs    = [ PIL.Image.open(i) for i in list_im ]
-# kiest kleinste afbeelding en maakt alle afbeeldingen die maat
-min_shape = sorted( [(np.sum(i.size), i.size ) for i in imgs])[0][1]
-imgs_comb = np.hstack( (np.asarray( i.resize(min_shape) ) for i in imgs ) )
- 
+imgs_comb = np.hstack(i for i in imgs )
+
 imgs_comb = PIL.Image.fromarray( imgs_comb)
 imgs_comb.save('horizontaal.gif')    
 
 list_im = [d, e, f]
 imgs    = [ PIL.Image.open(i) for i in list_im ]
-# kiest kleinste afbeelding en maakt alle afbeeldingen die maat
-min_shape = sorted( [(np.sum(i.size), i.size ) for i in imgs])[0][1]
-imgs_comb = np.hstack( (np.asarray( i.resize(min_shape) ) for i in imgs ) )
+imgs_comb = np.hstack(i for i in imgs )
 
 imgs_comb = PIL.Image.fromarray( imgs_comb)
 imgs_comb.save('horizontaal1.gif')    
 
 list_im = [g, h, i]
 imgs    = [ PIL.Image.open(i) for i in list_im ]
-# kiest kleinste afbeelding en maakt alle afbeeldingen die maat
-min_shape = sorted( [(np.sum(i.size), i.size ) for i in imgs])[0][1]
-imgs_comb = np.hstack( (np.asarray( i.resize(min_shape) ) for i in imgs ) )
+imgs_comb = np.hstack(i for i in imgs )
 
 imgs_comb = PIL.Image.fromarray( imgs_comb)
 imgs_comb.save('horizontaal2.gif')    
 
 list_im = [j, k, l]
 imgs    = [ PIL.Image.open(i) for i in list_im ]
-# kiest kleinste afbeelding en maakt alle afbeeldingen die maat
-min_shape = sorted( [(np.sum(i.size), i.size ) for i in imgs])[0][1]
-imgs_comb = np.hstack( (np.asarray( i.resize(min_shape) ) for i in imgs ) )
+imgs_comb = np.hstack(i for i in imgs )
 
 imgs_comb = PIL.Image.fromarray( imgs_comb)
 imgs_comb.save( 'horizontaal3.gif')    
 
 list_im = ['horizontaal.gif', 'horizontaal1.gif', 'horizontaal2.gif', 'horizontaal3.gif']
 imgs    = [ PIL.Image.open(i) for i in list_im ]
-# kiest kleinste afbeelding en maakt alle afbeeldingen die maat
-min_shape = sorted( [(np.sum(i.size), i.size ) for i in imgs])[0][1]
-imgs_comb = np.hstack( (np.asarray( i.resize(min_shape) ) for i in imgs ) )
+imgs_comb = np.hstack(i for i in imgs )
 
-imgs_comb = np.vstack( (np.asarray( i.resize(min_shape) ) for i in imgs ) )
+imgs_comb = np.vstack( i for i in imgs )
 imgs_comb = PIL.Image.fromarray( imgs_comb)
 imgs_comb.save('verticaal.gif')
 imgs_comb.show()
