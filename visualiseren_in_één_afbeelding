@@ -1,9 +1,11 @@
 import numpy as np
 import PIL
 from PIL import Image
+#dit zorgt ervoor dat de gifs opgeroepen kunnen worden als hun naam.gif en niet dat je nog de hele route naar de gif erbij moet zetten
 import os
 os.chdir('C:/Users\milas\Documents\kaarten')
 
+#a t/m l zijn de bovenste 12 kaarten als een string met .gif erachter
 bovenste_kaart=alle_kaarten[-1]
 a=''.join(bovenste_kaart)+'.gif'
 bovenste_kaart1=alle_kaarten[-2]
@@ -29,39 +31,45 @@ k=''.join(bovenste_kaart10)+'.gif'
 bovenste_kaart11=alle_kaarten[-12]
 l=''.join(bovenste_kaart11)+'.gif'
 
-list_im = [a,b,c]
-imgs = [Image.open(i) for i in list_im]
-imgs_comb = np.hstack(i for i in imgs)
+#list_im is een lijst met de bovenste drie kaarten als zin met .gif erachter
+lijst_image0 = [a,b,c]
+#opent de drie bovenste kaartjes als plaatje maar laat het nog niet zien op het scherm
+image0 = [Image.open(i) for i in lijst_image0]
+#zet de drie kaarten horizontaal naast elkaar
+image0_samen = np.hstack(i for i in image0)
 
-imgs_comb = Image.fromarray(imgs_comb)
-imgs_comb.save('horizontaal.gif')    
+#Maakt van een array een image
+image0_samen = Image.fromarray(image0_samen)
+#geeft de nieuwe image een naam
+image0_samen.save('horizontaal.gif')    
 
-list_im1 = [d, e, f]
-imgs1 = [Image.open(i) for i in list_im1]
-imgs_comb1 = np.hstack(i for i in imgs1)
+lijst_image1 = [d, e, f]
+image1 = [Image.open(i) for i in lijst_image1]
+image1_samen = np.hstack(i for i in image1)
 
-imgs_comb1 = Image.fromarray(imgs_comb1)
-imgs_comb1.save('horizontaal1.gif')    
+image1_samen = Image.fromarray(image1_samen)
+image1_samen.save('horizontaal1.gif')    
 
-list_im2 = [g, h, i]
-imgs2 = [Image.open(i) for i in list_im2]
-imgs_comb2 = np.hstack(i for i in imgs2)
+lijst_image2 = [g, h, i]
+image2 = [Image.open(i) for i in lijst_image2]
+image2_samen = np.hstack(i for i in image2)
 
-imgs_comb2 = Image.fromarray(imgs_comb2)
-imgs_comb2.save('horizontaal2.gif')    
+image2_samen = Image.fromarray(image2_samen)
+image2_samen.save('horizontaal2.gif')    
 
-list_im3 = [j, k, l]
-imgs3 = [Image.open(i) for i in list_im3]
-imgs_comb3 = np.hstack(i for i in imgs3)
+lijst_image3 = [j, k, l]
+image3 = [Image.open(i) for i in lijst_image3]
+image3_samen = np.hstack(i for i in image3)
 
-imgs_comb3 = Image.fromarray(imgs_comb3)
-imgs_comb3.save( 'horizontaal3.gif')    
+image3_samen = Image.fromarray(image3_samen)
+image3_samen.save( 'horizontaal3.gif')    
 
-list_im4 = ['horizontaal.gif', 'horizontaal1.gif', 'horizontaal2.gif', 'horizontaal3.gif']
-imgs4 = [Image.open(i) for i in list_im4]
-imgs_comb4 = np.hstack(i for i in imgs4)
+lijst_image4 = ['horizontaal.gif', 'horizontaal1.gif', 'horizontaal2.gif', 'horizontaal3.gif']
+image4 = [Image.open(i) for i in lijst_image4]
+image4_samen = np.hstack(i for i in image4)
 
-imgs_comb4 = np.vstack(i for i in imgs4)
-imgs_comb4 = Image.fromarray(imgs_comb4)
-imgs_comb4.save('verticaal.gif')
-imgs_comb4.show()
+#vstack zet de vier horizontale afbeeldingen verticaal naast elkaar, dus onder elkaar
+image4_samen = np.vstack(i for i in image4)
+image4_samen = Image.fromarray(image4_samen)
+image4_samen.save('verticaal.gif')
+image4_samen.show()
