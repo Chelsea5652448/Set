@@ -118,6 +118,7 @@ while len(alle_kaarten)>=0:
         check=0
         start=time.time()
         while time.time()-moeilijkheidsgraad<=start:
+            speler_wint='onbekend'
             invoer_speler = input("Vul hier je gevonden set in (als nummers van de kaarten met komma's ertussen zonder spaties'):")
             invoer_speler_list= invoer_speler.split(",")
             mogelijke_set=[]
@@ -132,14 +133,16 @@ while len(alle_kaarten)>=0:
             if check_set(Set(lijst_mogelijke_set[0]), Set(lijst_mogelijke_set[1]), Set(lijst_mogelijke_set[2])) == True:
                 print("Je hebt een set gevonden!")
                 Punten_Speler+=1
+                speler_wint='waar'
                 break
             else:
                 moeilijkheidsgraad-=5
                 print('Wrong!, je hebt nog',max(1,int(start-(time.time()-moeilijkheidsgraad))),'seconden')
             #Verwijder de kaarten uit de lijst met kaarten die op tafel liggen.
-        mogelijke_set=vind_willekeurige_set(kaarten_op_tafel)
-        print('De tijd is om, een mogelijke set was:',mogelijke_set)
-        punten_Computer+=1
+        if speler_wint!='waar':
+            mogelijke_set=vind_willekeurige_set(kaarten_op_tafel)
+            print('De tijd is om, een mogelijke set was:',mogelijke_set)
+            punten_Computer+=1
     if len(alle_kaarten)<3:
         break
     for j in range(len(mogelijke_set)):
@@ -148,3 +151,4 @@ while len(alle_kaarten)>=0:
     for b in range(3):
         kaarten_op_tafel.append(alle_kaarten[-1])
         alle_kaarten.pop()
+
