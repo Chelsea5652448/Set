@@ -1,4 +1,22 @@
+#Om een random volgorde van de kaarten in de stapel te krijgen maken we gebruik van de volgende code:
+import random
+random.seed(1)   #een vaste seed voor makkelijker debuggen Deze later verwijderen!!!!!
+alle_kaarten=[]   #wordt de lijst met alle 81 kaarten 
+kleur=['green', 'purple', 'red']
+vorm=['diamond','oval', 'squigle']
+inhoud=['empty', 'shaded','filled']
+hoeveelheid=[1,2,3]
+kaart=[]   #wordt een lijst met telkens 1 kaart erin 
+for i in kleur:
+    for j in vorm:
+        for k in inhoud:
+            for l in hoeveelheid:
+                kaart=[i,j,k,l]
+                alle_kaarten.append(kaart)
+random.shuffle(alle_kaarten)   #zet de kaarten in een random volgorde in de lijst, is vergelijkbaar met schudden van een stapel kaarten 
 #Code die twee kaarten kan vergelijken en vervolgens een functie die kan bepalen of de drie gegeven kaarten een set zijn
+
+
 class Set:
     def __init__(self,kaart=['red','oval','empty',1]):
         self.kleur=kaart[0]
@@ -29,24 +47,7 @@ def check_set(card1,card2,card3):
     elif (not card1>card2 and card2>card3) or (not card3>card2 and card1>card2) or (not card1>card2 and card1>card3):
         return False
     else:
-        return True
-   
-#Om een random volgorde van de kaarten in de stapel te krijgen maken we gebruik van de volgende code:
-import random
-random.seed(1)   #een vaste seed voor makkelijker debuggen Deze later verwijderen!!!!!
-alle_kaarten=[]   #wordt de lijst met alle 81 kaarten 
-kleur=['green', 'purple', 'red']
-vorm=['diamond','oval', 'squigle']
-inhoud=['empty', 'shaded','filled']
-hoeveelheid=[1,2,3]
-kaart=[]   #wordt een lijst met telkens 1 kaart erin 
-for i in kleur:
-    for j in vorm:
-        for k in inhoud:
-            for l in hoeveelheid:
-                kaart=[i,j,k,l]
-                alle_kaarten.append(kaart)
-random.shuffle(alle_kaarten)   #zet de kaarten in een random volgorde in de lijst, is vergelijkbaar met schudden van een stapel kaarten   
+        return True  
 
 
 #begin van het spel
