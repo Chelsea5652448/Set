@@ -31,6 +31,24 @@ def check_set(card1,card2,card3):
     else:
         return True
    
+#Om een random volgorde van de kaarten in de stapel te krijgen maken we gebruik van de volgende code:
+import random
+random.seed(1)   #een vaste seed voor makkelijker debuggen Deze later verwijderen!!!!!
+alle_kaarten=[]   #wordt de lijst met alle 81 kaarten 
+kleur=['green', 'purple', 'red']
+vorm=['diamond','oval', 'squigle']
+inhoud=['empty', 'shaded','filled']
+hoeveelheid=[1,2,3]
+kaart=[]   #wordt een lijst met telkens 1 kaart erin 
+for i in kleur:
+    for j in vorm:
+        for k in inhoud:
+            for l in hoeveelheid:
+                kaart=[i,j,k,l]
+                alle_kaarten.append(kaart)
+random.shuffle(alle_kaarten)   #zet de kaarten in een random volgorde in de lijst, is vergelijkbaar met schudden van een stapel kaarten   
+
+
 #begin van het spel
 #kaarten worden geschud en de bovenste 12 kaarten van de stapel 
 #(in dit geval de laatste 12 kaarten uit de lijst) worden aan een andere lijst (de tafel) toegevoegd en verwijderd uit de stapel
