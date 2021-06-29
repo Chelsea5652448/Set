@@ -5,7 +5,7 @@ alle_kaarten=[]   #wordt de lijst met alle 81 kaarten
 kleur=['green', 'purple', 'red']
 vorm=['diamond','oval', 'squigle']
 inhoud=['empty', 'shaded','filled']
-hoeveelheid=[1,2,3]
+hoeveelheid=['1','2','3']
 kaart=[]   #wordt een lijst met telkens 1 kaart erin 
 for i in kleur:
     for j in vorm:
