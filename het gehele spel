@@ -1,5 +1,21 @@
 import random
 import time
+from PIL import Image
+import os
+
+#functie om de kaarten op tafel in een image te zetten en deze te laten zien in het beeld
+def visualiseer_kaarten(kaarten_op_tafel):
+    os.chdir('C:/Users\naamvanuser\Documents\kaarten')   #Zodat je niet telkens het pad naar de afbeeldingen in de kaarten map er bij elke afbeelding bij hoeft te zetten
+    eindafbeelding=Image.new('RGB', (4*100, 3*200))   #een lege afbeelding, met als hoogte 3 maal de hoogte van een enkele kaart en als breedte die van 4 keer een enkele kaart
+    kaarten_op_tafel_img=[]
+    for kaart in kaarten_op_tafel:
+        kaarten_op_tafel_img.append(Image.open(''.join(kaart)+'.gif'))   #de 12 kaarten op tafel worden als afbeelding in een nieuwe lijst gezet
+    for i in range(3):
+        for j in range(4):
+            index=j+4*i   #index wordt 0 tot en  met 11
+            eindafbeelding.paste(kaarten_op_tafel_img[index],(j*100,i*200))  #zet al die 12 afbeeldingen in de lege afbeelding, de j en de i zorgen ervoor dat de juiste afbeelding op de juiste plaats in de lege afbeelding terecht komen
+    eindafbeelding.show()  #toont de afbeelding met de 12 kaarten in beeld
+    
 #Code die twee kaarten kan vergelijken en vervolgens een functie die kan bepalen of de drie gegeven kaarten een set zijn
 class Set:
     def __init__(self,kaart=['red','oval','empty',1]):
@@ -37,7 +53,7 @@ def check_set(card1,card2,card3):
 random.seed(1)   #een vaste seed voor makkelijker debuggen Deze later verwijderen!!!!!
 alle_kaarten=[]   #wordt de lijst met alle 81 kaarten 
 kleur=['green', 'purple', 'red']
-vorm=['diamond','oval', 'squigle']
+vorm=['diamond','oval', 'squiggle']
 inhoud=['empty', 'shaded','filled']
 hoeveelheid=['1','2','3']
 kaart=[]   #wordt een lijst met telkens 1 kaart erin 
