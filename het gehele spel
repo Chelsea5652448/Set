@@ -66,27 +66,54 @@ for b in range(12):   #een loop waarin twaalf keer de laatste kaart van de lijst
     img = Image.open(k+'.gif')
     img.show()   #een voor een worden alle 12 bovenste kaarten op het scherm getoond als afbeelding
 
-#De speler moet nu een gevonden set invoeren zodat het algoritme kan checken of met klopt.
-#De speler voert de drie nummers in van de kaarten waarvan de speler denkt dat het een set is.
-#De enige manier van invoeren van een mogelijke set is als volgt: 1,2,3 
-#Met op de plaatsen 1 2 en 3 willekeurig de cijfer van de 3 kaarten die de speler gekozen heeft.
-invoer_speler = input("Vul hier je gevonden set in (als nummers van de kaarten met komma's ertussen zonder spaties'):")
-invoer_speler_list= invoer_speler.split(",")
-mogelijke_set=[]
-for i in range(len(invoer_speler_list)):
-    mogelijke_set.append(int(invoer_speler_list[i]))
-lijst_mogelijke_set=[]
-for j in mogelijke_set:
-    lijst_mogelijke_set.append(kaarten_op_tafel[j-1])
+#code welk alle mogelijke sets vergelijkt en aangeeft welke sets een set zijn.
+def vind_alle_sets(kaarten_op_tafel):    
+    for i in range(len(kaarten_op_tafel)):
+        for j in range(i,len(kaarten_op_tafel)):
+            for k in range(j,len(kaarten_op_tafel)):
+                if i==j or j==k or i==k:
+                    pass
+                else:
+                    if check_set(Set(kaarten_op_tafel[i]),Set(kaarten_op_tafel[j]),Set(kaarten_op_tafel[k]))==True:
+                        Sets.append([i,j,k])
+    #als er geen set mogelijk is en alle sets dus leeg blijven is er sprake van een capset.
+    print(kaarten_op_tafel)
+    if Sets==[]:
+        return('Dit is een capset')
+    else: 
+        for i in range(len(Sets)):
+            for j in range(len(Sets[i])):
+                Sets[i][j]+=1
+        return(Sets)
+def vind_willekeurige_set(kaarten_op_tafel)  :
+    Sets=vind_alle_sets(kaarten_op_tafel)
+    if Sets!='Dit is een capset':
+        willekeurige_set=random.choice(Sets)
+        print('Een willekeurige set is',willekeurige_set)
 
-#print(check_set(Set(lijst_mogelijke_set[0]), Set(lijst_mogelijke_set[1]), Set(lijst_mogelijke_set[2])))
-
-if check_set(Set(lijst_mogelijke_set[0]), Set(lijst_mogelijke_set[1]), Set(lijst_mogelijke_set[2])) == True:
-    print("Je hebt een set gevonden!")
-    #Verwijder de kaarten uit de lijst met kaarten die op tafel liggen.
+while len(alle_kaarten)>=3:        
+    print(kaarten_op_tafel)
+    #De speler moet nu een gevonden set invoeren zodat het algoritme kan checken of met klopt.
+    #De speler voert de drie nummers in van de kaarten waarvan de speler denkt dat het een set is.
+    #De enige manier van invoeren van een mogelijke set is als volgt: 1,2,3 
+    #Met op de plaatsen 1 2 en 3 willekeurig de cijfer van de 3 kaarten die de speler gekozen heeft.
+    invoer_speler = input("Vul hier je gevonden set in (als nummers van de kaarten met komma's ertussen zonder spaties'):")
+    invoer_speler_list= invoer_speler.split(",")
+    mogelijke_set=[]
+    for i in range(len(invoer_speler_list)):
+        mogelijke_set.append(int(invoer_speler_list[i]))
+    lijst_mogelijke_set=[]
     for j in mogelijke_set:
-        kaarten_op_tafel.pop(j-1)
-    #Voeg 3 nieuwe kaarten toe aan de lijst met kaarten op tafel.
-    for b in range(3):
-        kaarten_op_tafel.append(alle_kaarten[-1])
-        alle_kaarten.pop()
+        lijst_mogelijke_set.append(kaarten_op_tafel[j-1])
+    
+    #print(check_set(Set(lijst_mogelijke_set[0]), Set(lijst_mogelijke_set[1]), Set(lijst_mogelijke_set[2])))
+    
+    if check_set(Set(lijst_mogelijke_set[0]), Set(lijst_mogelijke_set[1]), Set(lijst_mogelijke_set[2])) == True:
+        print("Je hebt een set gevonden!")
+        #Verwijder de kaarten uit de lijst met kaarten die op tafel liggen.
+        for j in mogelijke_set:
+            kaarten_op_tafel.pop(j-1)
+        #Voeg 3 nieuwe kaarten toe aan de lijst met kaarten op tafel.
+        for b in range(3):
+            kaarten_op_tafel.append(alle_kaarten[-1])
+            alle_kaarten.pop()
