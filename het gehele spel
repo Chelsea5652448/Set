@@ -98,7 +98,7 @@ def vind_willekeurige_set(kaarten_op_tafel)  :
 Punten_Speler=0
 punten_Computer=0
 niveau=60
-while len(alle_kaarten)>=3:        
+while len(alle_kaarten)>=0:        
     random.shuffle(kaarten_op_tafel)
     print(kaarten_op_tafel)
     if vind_alle_sets(kaarten_op_tafel)=='Capset':
@@ -137,6 +137,11 @@ while len(alle_kaarten)>=3:
                 moeilijkheidsgraad-=5
                 print('Wrong!, je hebt nog',max(1,int(start-(time.time()-moeilijkheidsgraad))),'seconden')
             #Verwijder de kaarten uit de lijst met kaarten die op tafel liggen.
+        mogelijke_set=vind_willekeurige_set(kaarten_op_tafel)
+        print('De tijd is om, een mogelijke set was:',mogelijke_set)
+        punten_Computer+=1
+    if len(alle_kaarten)<3:
+        break
     for j in range(len(mogelijke_set)):
         kaarten_op_tafel.pop(mogelijke_set[j]-j-1)
     #Voeg 3 nieuwe kaarten toe aan de lijst met kaarten op tafel.
