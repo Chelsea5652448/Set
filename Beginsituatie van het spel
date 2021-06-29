@@ -32,3 +32,6 @@ else:
         for j in range(len(Sets[i])):
             Sets[i][j]+=1
     print('De mogelijke Sets zijn:',Sets)
+if Sets!=[]:
+    willekeurige_set=random.choice(Sets)
+    print('Een willekeurige set is',willekeurige_set)
