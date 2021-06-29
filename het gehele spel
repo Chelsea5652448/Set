@@ -95,8 +95,8 @@ def vind_willekeurige_set(kaarten_op_tafel)  :
     if Sets!='Dit is een capset':
         willekeurige_set=random.choice(Sets)
         return(willekeurige_set)
-Punten_Speler=0
-punten_Computer=0
+punten_speler=0
+punten_computer=0
 niveau=60
 while len(alle_kaarten)>=0:        
     random.shuffle(kaarten_op_tafel)
@@ -135,7 +135,7 @@ while len(alle_kaarten)>=0:
             
             elif check_set(Set(lijst_mogelijke_set[0]), Set(lijst_mogelijke_set[1]), Set(lijst_mogelijke_set[2])) == True:
                 print("\nJe hebt een set gevonden!\n")
-                Punten_Speler+=1
+                punten_speler+=1
                 speler_wint='waar'
                 break
             else:
@@ -145,7 +145,7 @@ while len(alle_kaarten)>=0:
         if speler_wint!='waar':
             mogelijke_set=vind_willekeurige_set(kaarten_op_tafel)
             print('\nDe tijd is om, een mogelijke set was:',mogelijke_set,'\n')
-            punten_Computer+=1
+            punten_computer+=1
     if len(alle_kaarten)<3:
         break
     for j in range(len(mogelijke_set)):
@@ -154,8 +154,8 @@ while len(alle_kaarten)>=0:
     for b in range(3):
         kaarten_op_tafel.append(alle_kaarten[-1])
         alle_kaarten.pop()
-    print('\nDe pot is leeg, het spel is voorbij, de eindstand is: Computer:',punten_Computer,'Speler:',Punten_Speler)
-    if punten_Computer()<=Punten_Speler():
+    print('\nDe pot is leeg, het spel is voorbij, de eindstand is: Computer:',punten_computer,'Speler:',punten_speler)
+    if punten_computer()<=punten_speler():
         print('Helaas, u heeft de computer niet kunnen verslaan.')
     else:
         print('Gefeliciteerd, u heeft gewonnen')
