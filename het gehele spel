@@ -131,20 +131,20 @@ while len(alle_kaarten)>=0:
             #print(check_set(Set(lijst_mogelijke_set[0]), Set(lijst_mogelijke_set[1]), Set(lijst_mogelijke_set[2])))
             if lijst_mogelijke_set[0]==lijst_mogelijke_set[1] or lijst_mogelijke_set[1]==lijst_mogelijke_set[2] or lijst_mogelijke_set[0]==lijst_mogelijke_set[2]:
                 moeilijkheidsgraad-=5
-                print('Zorg dat alle kaarten verschillend zijn, je hebt nog',max(1,int(start-(time.time()-moeilijkheidsgraad))),'seconden om een set te vinden.')
+                print('\nZorg dat alle kaarten verschillend zijn, je hebt nog',max(1,int(start-(time.time()-moeilijkheidsgraad))),'seconden om een set te vinden.\n')
             
             elif check_set(Set(lijst_mogelijke_set[0]), Set(lijst_mogelijke_set[1]), Set(lijst_mogelijke_set[2])) == True:
-                print("Je hebt een set gevonden!")
+                print("\nJe hebt een set gevonden!\n")
                 Punten_Speler+=1
                 speler_wint='waar'
                 break
             else:
                 moeilijkheidsgraad-=5
-                print('Helaas, dit is geen set!, je hebt nog',max(1,int(start-(time.time()-moeilijkheidsgraad))),'seconden')
+                print('\nHelaas, dit is geen set!, je hebt nog',max(1,int(start-(time.time()-moeilijkheidsgraad))),'seconden\n')
             #Verwijder de kaarten uit de lijst met kaarten die op tafel liggen.
         if speler_wint!='waar':
             mogelijke_set=vind_willekeurige_set(kaarten_op_tafel)
-            print('De tijd is om, een mogelijke set was:',mogelijke_set)
+            print('\nDe tijd is om, een mogelijke set was:',mogelijke_set,'\n')
             punten_Computer+=1
     if len(alle_kaarten)<3:
         break
@@ -154,3 +154,8 @@ while len(alle_kaarten)>=0:
     for b in range(3):
         kaarten_op_tafel.append(alle_kaarten[-1])
         alle_kaarten.pop()
+    print('\nDe pot is leeg, het spel is voorbij, de eindstand is: Computer:',punten_Computer,'Speler:',Punten_Speler)
+    if punten_Computer()<=Punten_Speler():
+        print('Helaas, u heeft de computer niet kunnen verslaan.')
+    else:
+        print('Gefeliciteerd, u heeft gewonnen')
