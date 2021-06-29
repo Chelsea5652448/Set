@@ -30,3 +30,20 @@ def check_set(card1,card2,card3):
         return False
     else:
         return True
+   
+#begin van het spel
+#kaarten worden geschud en de bovenste 12 kaarten van de stapel 
+#(in dit geval de laatste 12 kaarten uit de lijst) worden aan een andere lijst (de tafel) toegevoegd en verwijderd uit de stapel
+
+from PIL import Image
+import os
+os.chdir('C:/Users\milas\Documents\kaarten')
+
+kaarten_op_tafel=[]
+for b in range(12):   #een loop waarin twaalf keer de laatste kaart van de lijst met alle kaarten wordt toegevoegd aan een lijst met kaarten die op tafel liggen en waarbij deze kaart verwijdert wordt uit de lijst met alle kaarten
+    kaarten_op_tafel.append(alle_kaarten[-1])
+    alle_kaarten.pop()
+    bovenste_kaart=alle_kaarten[-1]
+    k=''.join(bovenste_kaart)
+    img = Image.open(k+'.gif')
+    img.show()   #een voor een worden alle 12 bovenste kaarten op het scherm getoond als afbeelding
