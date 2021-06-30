@@ -9,12 +9,19 @@ def visualiseer_kaarten(kaarten_op_tafel):
     os.chdir('C:/Users/' + usernaam + '/Documents/kaarten')   #Zodat je niet telkens het pad naar de afbeeldingen in de kaarten map er bij elke afbeelding bij hoeft te zetten
     eindafbeelding=Image.new('RGB', (4*100, 3*200))   #een lege afbeelding, met als hoogte 3 maal de hoogte van een enkele kaart en als breedte die van 4 keer een enkele kaart
     kaarten_op_tafel_img=[]
+    cijfers=['1234.gif', '5678.gif', '9101112.gif']
+    cijfer_img=[]
     for kaart in kaarten_op_tafel:
         kaarten_op_tafel_img.append(Image.open(''.join(kaart)+'.gif'))   #de 12 kaarten op tafel worden als afbeelding in een nieuwe lijst gezet
     for i in range(3):
         for j in range(4):
             index=j+4*i   #index wordt 0 tot en  met 11
             eindafbeelding.paste(kaarten_op_tafel_img[index],(j*100,i*200))  #zet al die 12 afbeeldingen in de lege afbeelding, de j en de i zorgen ervoor dat de juiste afbeelding op de juiste plaats in de lege afbeelding terecht komen
+    for cijfer in cijfers:
+        cijfer_img.append(Image.open(cijfer))
+    for l in range(3):
+        index2=l
+        eindafbeelding.paste(cijfer_img[index2],(0,l*200))
     eindafbeelding.show()  #toont de afbeelding met de 12 kaarten in beeld
     
 #Code die twee kaarten kan vergelijken en vervolgens een functie die kan bepalen of de drie gegeven kaarten een set zijn
