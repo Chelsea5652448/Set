@@ -1,9 +1,3 @@
-# -*- coding: utf-8 -*-
-"""
-Created on Wed Jun 30 11:39:22 2021
-
-@author: jenss
-"""
 
 import random
 import time
@@ -148,7 +142,7 @@ def timer(x):
             return()
         print(x-i)
         time.sleep(1)
-    print('/nde tijd is vorbij, druk op "enter" om door te gaan./n')
+    print('\nde tijd is vorbij, druk op "enter" om door te gaan.\n')
     
 def ronde_spelen(stopwatch_timer,score):      
     (punten_speler,punten_computer)=score
@@ -156,7 +150,7 @@ def ronde_spelen(stopwatch_timer,score):
     visualiseer_kaarten(kaarten_op_tafel)
     if vind_alle_sets(kaarten_op_tafel)=='Capset':
         time.sleep(5)
-        print('/nDit is een capset, we zullen 3 nieuwe kaarten delen./n')
+        print('\nDit is een capset, we zullen 3 nieuwe kaarten delen.\n')
         mogelijke_set=[1,2,3]
     
     #De speler moet nu een gevonden set invoeren zodat het algoritme kan checken of met klopt.
@@ -182,7 +176,7 @@ def ronde_spelen(stopwatch_timer,score):
             
             #print(check_set(Set(lijst_mogelijke_set[0]), Set(lijst_mogelijke_set[1]), Set(lijst_mogelijke_set[2])))
             if lijst_mogelijke_set[0]==lijst_mogelijke_set[1] or lijst_mogelijke_set[1]==lijst_mogelijke_set[2] or lijst_mogelijke_set[0]==lijst_mogelijke_set[2]:
-                print('\nHelaas, dit is geen set!\n onthoud dat elke kaart slechts eenmaal voor mag komen in een set/n' )
+                print('\nHelaas, dit is geen set!\n onthoud dat elke kaart slechts eenmaal voor mag komen in een set\n' )
                 print('Een mogelijke set was:',x,'de computer speelt deze set.')
                 mogelijke_set=[x]
                 punten_computer+=1
@@ -209,9 +203,9 @@ while len(alle_kaarten)>=0:
     stopwatch=threading.Thread(target=timer, args=[niveau])
     stopwatch.start()
     score=ronde_spelen(stopwatch_timer,score)
-print('/nDe pot is leeg, het spel is afgelopen./n')
+print('\nDe pot is leeg, het spel is afgelopen.\n')
 (punten_speler,punten_computer)=score
 if punten_speler>punten_computer:
-    print('/nGefeliciteerd, u heeft de computer verslagen met:',score)
+    print('\nGefeliciteerd, u heeft de computer verslagen met:',score)
 else:
-    print('/nhelaas, u heeft de computer niet kunnen verslaand, de eindstand is:',score)
+    print('\nhelaas, u heeft de computer niet kunnen verslaand, de eindstand is:',score)
