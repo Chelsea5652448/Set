@@ -1,0 +1,212 @@
+import random
+import time
+from PIL import Image
+import os
+import threading
+    
+#Code die twee kaarten kan vergelijken en vervolgens een functie die kan bepalen of de drie gegeven kaarten een set zijn
+class Set:
+    def __init__(self,kaart=['red','oval','empty',1]):
+        self.kleur=kaart[0]
+        self.vorm=kaart[1]
+        self.inhoud=kaart[2]
+        self.hoeveelheid=kaart[3]
+                                                                     #om te controleren of kleur,vorm,inhoud,hoeveelheid hetzelfde zijn,
+                                                                     #kunnen we respectievelijk nu <,<=,>,>= gebruiken.
+    def __lt__(self,other):
+        return self.kleur==other.kleur
+    
+    def __le__(self,other):
+        return self.vorm==other.vorm
+    
+    def __gt__(self,other):
+        return self.inhoud==other.inhoud
+    
+    def __ge__(self,other):
+        return self.hoeveelheid==other.hoeveelheid
+#merk op dat de invoer Altijd!!!!! class set moet hebben.
+def check_set(card1,card2,card3):
+     if (not card1<=card2 and card2<=card3) or (not card3<=card2 and card1<=card2) or (not card1<=card2 and card1<=card3):
+        return False
+     elif (not card1<card2 and card2<card3) or (not card3<card2 and card1<card2) or (not card1<card2 and card1<card3):
+        return False
+     elif (not card1>=card2 and card2>=card3) or (not card3>=card2 and card1>=card2) or (not card1>=card2 and card1>=card3):
+        return False
+     elif (not card1>card2 and card2>card3) or (not card3>card2 and card1>card2) or (not card1>card2 and card1>card3):
+        return False
+     else:
+        return True
+
+
+print("Welkom bij het programma waar je Set zult spelen tegen de computer. Er volgt nu eerst wat praktische informatie over het programma. Daarna volgen de spelregels en kun je beginnen het spel te spelen.\n\nOm de kaarten van het spel te kunnen visualiseren zul je het mapje genaamd kaarten moeten downloaden en opslaan onder Documents op je computer. Vervolgens om te zorgen dat python het juiste pad vindt naar het mapje waar de kaarten in staan vragen we je om de gebruikersnaam van je verkenner. Deze kun je vinden door in je verkenner rechts te klikken in de balk midden bovenin, je gebruikersnaam staat dan tussen de twee / achter C:/Users (voorbeeld: C:/Users/gebruikersnaam/) en vaak is je gebruikersnaam de eerste 5 letters van je naam zonder hoofdletters")
+usernaam=input("Vul hier a.u.b. je gebruikersnaam van je verkenner in:") #vraag de gebruikersnaam van de speler op zodat we kunnen zorgen dat de plaatjes via het juiste pad worden opgeroepen
+print("\nNu zul je een voorbeeld te zien krijgen van hoe de kaarten weergegeven zullen worden. Het handigste is om dit voorbeeld gelijk zodanig te verkleinen zodat het veld waarin je speelt nog te goed te zien is. De kaarten zijn van links naar rechts en van boven naar onder genummerd van 1 t/m 12.")
+#functie om de kaarten op tafel in een image te zetten en deze te laten zien in het beeld
+def visualiseer_kaarten(kaarten_op_tafel):
+    os.chdir('C:/Users/' + usernaam + '/Documents/kaarten')   #Zodat je niet telkens het pad naar de afbeeldingen in de kaarten map er bij elke afbeelding bij hoeft te zetten
+    eindafbeelding=Image.new('RGB', (4*100, 3*200))   #een lege afbeelding, met als hoogte 3 maal de hoogte van een enkele kaart en als breedte die van 4 keer een enkele kaart
+    kaarten_op_tafel_img=[]
+    cijfers=['1234.gif', '5678.gif', '9101112.gif']
+    cijfer_img=[]
+    for kaart in kaarten_op_tafel:
+        kaarten_op_tafel_img.append(Image.open(''.join(kaart)+'.gif'))   #de 12 kaarten op tafel worden als afbeelding in een nieuwe lijst gezet
+    for i in range(3):
+        for j in range(4):
+            index=j+4*i   #index wordt 0 tot en  met 11
+            eindafbeelding.paste(kaarten_op_tafel_img[index],(j*100,i*200))  #zet al die 12 afbeeldingen in de lege afbeelding, de j en de i zorgen ervoor dat de juiste afbeelding op de juiste plaats in de lege afbeelding terecht komen
+    for cijfer in cijfers:
+        cijfer_img.append(Image.open(cijfer))
+    for l in range(3):
+        index2=l
+        eindafbeelding.paste(cijfer_img[index2],(0,l*200))
+    eindafbeelding.show()  #toont de afbeelding met de 12 kaarten in beeld
+   
+#Om een random volgorde van de kaarten in de stapel te krijgen maken we gebruik van de volgende code:
+random.seed(1)   #een vaste seed voor makkelijker debuggen Deze later verwijderen!!!!!
+alle_kaarten=[]   #wordt de lijst met alle 81 kaarten 
+kleur=['green', 'purple', 'red']
+vorm=['diamond','oval', 'squiggle']
+inhoud=['empty', 'shaded','filled']
+hoeveelheid=['1','2','3']
+kaart=[]   #wordt een lijst met telkens 1 kaart erin 
+for i in kleur:
+    for j in vorm:
+        for k in inhoud:
+            for l in hoeveelheid:
+                kaart=[i,j,k,l]
+                alle_kaarten.append(kaart)
+random.shuffle(alle_kaarten)   #zet de kaarten in een random volgorde in de lijst, is vergelijkbaar met schudden van een stapel kaarten   
+
+
+kaarten_op_tafel_voorbeeld=[]
+for b in range(12):   #een loop waarin twaalf keer de laatste kaart van de lijst met alle kaarten wordt toegevoegd aan een lijst met kaarten die op tafel liggen en waarbij deze kaart verwijdert wordt uit de lijst met alle kaarten
+    kaarten_op_tafel_voorbeeld.append(alle_kaarten[-1])
+    alle_kaarten.pop()
+    bovenste_kaart=alle_kaarten[-1]
+visualiseer_kaarten(kaarten_op_tafel_voorbeeld)
+print("\nNu volgen de spelregels. Deze zijn ook na te lezen in het pdf-bestand.\nHet doel van dit spel is om zo veel mogelijk sets te vinden en zo de computer te verslaan. Op de kaarten staan symbolen met vier verschillende eigenschappen; de kleur (groen, rood, paars), de vorm, de vulling (solide, gestreept of open) en het aantal (1,2,3). Een set bestaat uit drie kaarten en moet aan de volgende eisen voldoen:\nElke eigenschap van de symbolen op de kaart moet of op alle drie de kaarten hetzelfde zijn of op alle drie verschillend. Je krijgt steeds twaalf kaarten te zien waar je een set uit moet herkennen. Mocht er geen set tussen de twaalf getoonde kaarten zitten dan zal de computer drie kaarten verwijderen en drie nieuwe kaarten toevoegen.\nAls je een set gevonden denkt te hebben kun je de nummers van de kaarten die samen mogelijk een set vormen invoeren. Als je een set gevonden hebt krijg je een punt en worden de kaarten van de set vervangen door nieuwe kaarten. Als je na een bepaalde tijd nog geen set hebt gevonden krijgt de computer een punt. Pas goed op met het vinden van een set, want als je kaarten invoert die geen set vormen samen is je tijd ook voorbij en krijgt de computer een punt.\nJe kunt zelf de moeilijkheidsgraad van het spel bepalen. Deze moeilijkheidsgraad bepaalt hoe lang jij de tijd hebt om een set te vinden. Mocht het nou zo zijn dat je het idee hebt dat je echt geen set kunt vinden, maar dat je tijd nog niet om is, dan kun je altijd een willekeurige combinatie van kaarten invoeren. Bedenk hierbij wel dat de computer dan een punt zal krijgen. Om de moeilijkheidsgraad te bepalen kun je hieronder invullen hoeveel tijd je zou willen voor het vinden van een set.")
+niveau=input("Geef hier aan wat je als moeilijkheidsgraad zou willen (let op: dit moet worden aangegeven in seconden), kies bijvoorbeeld voor 120, 300 of 600 seconden:")
+
+
+#begin van het spel
+#kaarten worden geschud en de bovenste 12 kaarten van de stapel 
+#(in dit geval de laatste 12 kaarten uit de lijst) worden aan een andere lijst (de tafel) toegevoegd en verwijderd uit de stapel
+
+# =============================================================================
+# from PIL import Image
+# import os
+# os.chdir('C:/Users\milas\Documents\kaarten')
+# =============================================================================
+
+kaarten_op_tafel=[]
+for b in range(12):   #een loop waarin twaalf keer de laatste kaart van de lijst met alle kaarten wordt toegevoegd aan een lijst met kaarten die op tafel liggen en waarbij deze kaart verwijdert wordt uit de lijst met alle kaarten
+    kaarten_op_tafel.append(alle_kaarten[-1])
+    alle_kaarten.pop()
+    bovenste_kaart=alle_kaarten[-1]
+# =============================================================================
+#     k=''.join(bovenste_kaart)
+#     img = Image.open(k+'.gif')
+#     img.show()   #een voor een worden alle 12 bovenste kaarten op het scherm getoond als afbeelding
+# =============================================================================
+
+#code welk alle mogelijke sets vergelijkt en aangeeft welke sets een set zijn.
+def vind_alle_sets(kaarten_op_tafel):    
+    Sets=[]
+    for i in range(len(kaarten_op_tafel)):
+        for j in range(i,len(kaarten_op_tafel)):
+            for k in range(j,len(kaarten_op_tafel)):
+                if i==j or j==k or i==k:
+                    pass
+                else:
+                    if check_set(Set(kaarten_op_tafel[i]),Set(kaarten_op_tafel[j]),Set(kaarten_op_tafel[k]))==True:
+                        Sets.append([i,j,k])
+    #als er geen set mogelijk is en alle sets dus leeg blijven is er sprake van een capset.
+    if Sets==[]:
+        return('Capset')
+    else: 
+        for i in range(len(Sets)):
+            for j in range(len(Sets[i])):
+                Sets[i][j]+=1
+        return(Sets)
+def vind_willekeurige_set(kaarten_op_tafel)  :
+    Sets=vind_alle_sets(kaarten_op_tafel)
+    if Sets!='Dit is een capset':
+        willekeurige_set=random.choice(Sets)
+        return(willekeurige_set)
+score=(0,0)
+niveau=60
+
+def timer(x):
+    for i in range(0,x):
+        if len(stopwatch_timer)>0:
+            return()
+        print(x-i)
+        time.sleep(1)
+    print('/nde tijd is vorbij, druk op "enter" om door te gaan./n')
+    
+def ronde_spelen(stopwatch_timer,score):      
+    (punten_speler,punten_computer)=score
+    random.shuffle(kaarten_op_tafel)
+    print(kaarten_op_tafel)
+    if vind_alle_sets(kaarten_op_tafel)=='Capset':
+        time.sleep(5)
+        print('/nDit is een capset, we zullen 3 nieuwe kaarten delen./n')
+        mogelijke_set=[1,2,3]
+    
+    #De speler moet nu een gevonden set invoeren zodat het algoritme kan checken of met klopt.
+    #De speler voert de drie nummers in van de kaarten waarvan de speler denkt dat het een set is.
+    #De enige manier van invoeren van een mogelijke set is als volgt: 1,2,3 
+    #Met op de plaatsen 1 2 en 3 willekeurig de cijfer van de 3 kaarten die de speler gekozen heeft.
+    else:
+        x=vind_willekeurige_set(kaarten_op_tafel)
+        print(x)
+        invoer_speler = input("Vul hier je gevonden set in (als nummers van de kaarten met komma's ertussen zonder spaties'):")
+        stopwatch_timer.append('stop')
+        if invoer_speler=='':
+            print('U heeft geen set gevonden, een mogelijke set was:',x,'de computer speelt deze set.')    
+            mogelijke_set=x
+            punten_computer+=1
+        else:
+            invoer_speler_list= invoer_speler.split(",")
+            mogelijke_set=[]
+            for i in range(len(invoer_speler_list)):
+                mogelijke_set.append(int(invoer_speler_list[i]))
+            lijst_mogelijke_set=[]
+            for j in mogelijke_set:
+                lijst_mogelijke_set.append(kaarten_op_tafel[j-1])
+            
+            #print(check_set(Set(lijst_mogelijke_set[0]), Set(lijst_mogelijke_set[1]), Set(lijst_mogelijke_set[2])))
+            if lijst_mogelijke_set[0]==lijst_mogelijke_set[1] or lijst_mogelijke_set[1]==lijst_mogelijke_set[2] or lijst_mogelijke_set[0]==lijst_mogelijke_set[2]:
+                print('\nHelaas, dit is geen set!\n onthoud dat elke kaart slechts eenmaal voor mag komen in een set/n' )
+                print('Een mogelijke set was:',x,'de computer speelt deze set.')
+                mogelijke_set=[x]
+                punten_computer+=1
+            elif check_set(Set(lijst_mogelijke_set[0]), Set(lijst_mogelijke_set[1]), Set(lijst_mogelijke_set[2])) == True:
+                print("\nJe hebt een set gevonden!\n")
+                punten_speler+=1
+            else:
+                print('\nHelaas, dit is geen set!\n')
+                print('Een mogelijke set was:',x,'de computer speelt deze set.')
+                mogelijke_set=[x]
+                punten_computer+=1
+            if len(alle_kaarten)>=3:    
+                for j in range(len(mogelijke_set)):
+                    kaarten_op_tafel.pop(mogelijke_set[j]-j-1)
+ #Voeg 3 nieuwe kaarten toe aan de lijst met kaarten op tafel.
+                for b in range(3):
+                    kaarten_op_tafel.append(alle_kaarten[-1])
+                    alle_kaarten.pop()
+            return(score)
+        #Verwijder de kaarten uit de lijst met kaarten die op tafel liggen.
+while len(alle_kaarten)>=0:
+    time.sleep(1)
+    stopwatch_timer=[]
+    stopwatch=threading.Thread(target=timer, args=(niveau))
+    stopwatch.start()
+    score=ronde_spelen(stopwatch_timer,score)
+print('/nDe pot is leeg, het spel is afgelopen./n')
+(punten_speler,punten_computer)=score
+if punten_speler>punten_computer:
+    print('/nGefeliciteerd, u heeft de computer verslagen met:',score)
+else:
+    print('/nhelaas, u heeft de computer niet kunnen verslaand, de eindstand is:',score)
