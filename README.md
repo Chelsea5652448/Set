@@ -37,7 +37,7 @@ en speler opnieuw vragen een set in te voeren
 *win/verlies programeren.
 *Het geheel in een while loop zetten
 
-allen nog:
+alleen nog:
 timer
 gebruiksaanwijzing
 
@@ -48,5 +48,9 @@ to do:
 errors oplossen
 leesbaarheid code verbeteren
 verslag schrijven
+pdf met kaartenzip, pdf handleiding schrijven
 
 error enter en error foute set zijn opgelost
+error capset nog testen
+
+
