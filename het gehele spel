@@ -5,7 +5,8 @@ import os
 
 #functie om de kaarten op tafel in een image te zetten en deze te laten zien in het beeld
 def visualiseer_kaarten(kaarten_op_tafel):
-    os.chdir('C:/Users\naamvanuser\Documents\kaarten')   #Zodat je niet telkens het pad naar de afbeeldingen in de kaarten map er bij elke afbeelding bij hoeft te zetten
+    usernaam='naam van user'
+    os.chdir('C:/Users/' + usernaam + '/Documents/kaarten')   #Zodat je niet telkens het pad naar de afbeeldingen in de kaarten map er bij elke afbeelding bij hoeft te zetten
     eindafbeelding=Image.new('RGB', (4*100, 3*200))   #een lege afbeelding, met als hoogte 3 maal de hoogte van een enkele kaart en als breedte die van 4 keer een enkele kaart
     kaarten_op_tafel_img=[]
     for kaart in kaarten_op_tafel:
