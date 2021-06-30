@@ -48,3 +48,5 @@ to do:
 errors oplossen
 leesbaarheid code verbeteren
 verslag schrijven
+
+error enter en error foute set zijn opgelost
