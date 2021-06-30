@@ -1,3 +1,10 @@
+# -*- coding: utf-8 -*-
+"""
+Created on Wed Jun 30 11:39:22 2021
+
+@author: jenss
+"""
+
 import random
 import time
 from PIL import Image
@@ -62,7 +69,7 @@ def visualiseer_kaarten(kaarten_op_tafel):
     eindafbeelding.show()  #toont de afbeelding met de 12 kaarten in beeld
    
 #Om een random volgorde van de kaarten in de stapel te krijgen maken we gebruik van de volgende code:
-random.seed(1)   #een vaste seed voor makkelijker debuggen Deze later verwijderen!!!!!
+#random.seed(1)   #een vaste seed voor makkelijker debuggen Deze later verwijderen!!!!!
 alle_kaarten=[]   #wordt de lijst met alle 81 kaarten 
 kleur=['green', 'purple', 'red']
 vorm=['diamond','oval', 'squiggle']
@@ -83,10 +90,11 @@ for b in range(12):   #een loop waarin twaalf keer de laatste kaart van de lijst
     kaarten_op_tafel_voorbeeld.append(alle_kaarten[-1])
     alle_kaarten.pop()
     bovenste_kaart=alle_kaarten[-1]
+print(input('vul iets in om het voorbeeld te zien te krijgen:'))
 visualiseer_kaarten(kaarten_op_tafel_voorbeeld)
 print("\nNu volgen de spelregels. Deze zijn ook na te lezen in het pdf-bestand.\nHet doel van dit spel is om zo veel mogelijk sets te vinden en zo de computer te verslaan. Op de kaarten staan symbolen met vier verschillende eigenschappen; de kleur (groen, rood, paars), de vorm, de vulling (solide, gestreept of open) en het aantal (1,2,3). Een set bestaat uit drie kaarten en moet aan de volgende eisen voldoen:\nElke eigenschap van de symbolen op de kaart moet of op alle drie de kaarten hetzelfde zijn of op alle drie verschillend. Je krijgt steeds twaalf kaarten te zien waar je een set uit moet herkennen. Mocht er geen set tussen de twaalf getoonde kaarten zitten dan zal de computer drie kaarten verwijderen en drie nieuwe kaarten toevoegen.\nAls je een set gevonden denkt te hebben kun je de nummers van de kaarten die samen mogelijk een set vormen invoeren. Als je een set gevonden hebt krijg je een punt en worden de kaarten van de set vervangen door nieuwe kaarten. Als je na een bepaalde tijd nog geen set hebt gevonden krijgt de computer een punt. Pas goed op met het vinden van een set, want als je kaarten invoert die geen set vormen samen is je tijd ook voorbij en krijgt de computer een punt.\nJe kunt zelf de moeilijkheidsgraad van het spel bepalen. Deze moeilijkheidsgraad bepaalt hoe lang jij de tijd hebt om een set te vinden. Mocht het nou zo zijn dat je het idee hebt dat je echt geen set kunt vinden, maar dat je tijd nog niet om is, dan kun je altijd een willekeurige combinatie van kaarten invoeren. Bedenk hierbij wel dat de computer dan een punt zal krijgen. Om de moeilijkheidsgraad te bepalen kun je hieronder invullen hoeveel tijd je zou willen voor het vinden van een set.")
 niveau=input("Geef hier aan wat je als moeilijkheidsgraad zou willen (let op: dit moet worden aangegeven in seconden), kies bijvoorbeeld voor 120, 300 of 600 seconden:")
-
+niveau=int(niveau)
 
 #begin van het spel
 #kaarten worden geschud en de bovenste 12 kaarten van de stapel 
@@ -134,8 +142,6 @@ def vind_willekeurige_set(kaarten_op_tafel)  :
         willekeurige_set=random.choice(Sets)
         return(willekeurige_set)
 score=(0,0)
-niveau=60
-
 def timer(x):
     for i in range(0,x):
         if len(stopwatch_timer)>0:
@@ -147,7 +153,7 @@ def timer(x):
 def ronde_spelen(stopwatch_timer,score):      
     (punten_speler,punten_computer)=score
     random.shuffle(kaarten_op_tafel)
-    print(kaarten_op_tafel)
+    visualiseer_kaarten(kaarten_op_tafel)
     if vind_alle_sets(kaarten_op_tafel)=='Capset':
         time.sleep(5)
         print('/nDit is een capset, we zullen 3 nieuwe kaarten delen./n')
@@ -159,7 +165,6 @@ def ronde_spelen(stopwatch_timer,score):
     #Met op de plaatsen 1 2 en 3 willekeurig de cijfer van de 3 kaarten die de speler gekozen heeft.
     else:
         x=vind_willekeurige_set(kaarten_op_tafel)
-        print(x)
         invoer_speler = input("Vul hier je gevonden set in (als nummers van de kaarten met komma's ertussen zonder spaties'):")
         stopwatch_timer.append('stop')
         if invoer_speler=='':
@@ -201,7 +206,7 @@ def ronde_spelen(stopwatch_timer,score):
 while len(alle_kaarten)>=0:
     time.sleep(1)
     stopwatch_timer=[]
-    stopwatch=threading.Thread(target=timer, args=(niveau))
+    stopwatch=threading.Thread(target=timer, args=[niveau])
     stopwatch.start()
     score=ronde_spelen(stopwatch_timer,score)
 print('/nDe pot is leeg, het spel is afgelopen./n')
