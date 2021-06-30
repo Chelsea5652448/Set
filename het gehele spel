@@ -3,26 +3,10 @@ import time
 from PIL import Image
 import os
 
-#functie om de kaarten op tafel in een image te zetten en deze te laten zien in het beeld
-def visualiseer_kaarten(kaarten_op_tafel):
-    usernaam='naam van user'
-    os.chdir('C:/Users/' + usernaam + '/Documents/kaarten')   #Zodat je niet telkens het pad naar de afbeeldingen in de kaarten map er bij elke afbeelding bij hoeft te zetten
-    eindafbeelding=Image.new('RGB', (4*100, 3*200))   #een lege afbeelding, met als hoogte 3 maal de hoogte van een enkele kaart en als breedte die van 4 keer een enkele kaart
-    kaarten_op_tafel_img=[]
-    cijfers=['1234.gif', '5678.gif', '9101112.gif']
-    cijfer_img=[]
-    for kaart in kaarten_op_tafel:
-        kaarten_op_tafel_img.append(Image.open(''.join(kaart)+'.gif'))   #de 12 kaarten op tafel worden als afbeelding in een nieuwe lijst gezet
-    for i in range(3):
-        for j in range(4):
-            index=j+4*i   #index wordt 0 tot en  met 11
-            eindafbeelding.paste(kaarten_op_tafel_img[index],(j*100,i*200))  #zet al die 12 afbeeldingen in de lege afbeelding, de j en de i zorgen ervoor dat de juiste afbeelding op de juiste plaats in de lege afbeelding terecht komen
-    for cijfer in cijfers:
-        cijfer_img.append(Image.open(cijfer))
-    for l in range(3):
-        index2=l
-        eindafbeelding.paste(cijfer_img[index2],(0,l*200))
-    eindafbeelding.show()  #toont de afbeelding met de 12 kaarten in beeld
+import random
+import time
+from PIL import Image
+import os
     
 #Code die twee kaarten kan vergelijken en vervolgens een functie die kan bepalen of de drie gegeven kaarten een set zijn
 class Set:
@@ -56,6 +40,30 @@ def check_set(card1,card2,card3):
         return False
      else:
         return True
+
+
+print("Welkom bij het programma waar je Set zult spelen tegen de computer. Er volgt nu eerst wat praktische informatie over het programma. Daarna volgen de spelregels en kun je beginnen het spel te spelen.\n\nOm de kaarten van het spel te kunnen visualiseren zul je het mapje genaamd kaarten moeten downloaden en opslaan onder Documents op je computer. Vervolgens om te zorgen dat python het juiste pad vindt naar het mapje waar de kaarten in staan vragen we je om de gebruikersnaam van je verkenner. Deze kun je vinden door in je verkenner rechts te klikken in de balk midden bovenin, je gebruikersnaam staat dan tussen de twee / achter C:/Users (voorbeeld: C:/Users/gebruikersnaam/) en vaak is je gebruikersnaam de eerste 5 letters van je naam zonder hoofdletters")
+usernaam=input("Vul hier a.u.b. je gebruikersnaam van je verkenner in:") #vraag de gebruikersnaam van de speler op zodat we kunnen zorgen dat de plaatjes via het juiste pad worden opgeroepen
+print("\nNu zul je een voorbeeld te zien krijgen van hoe de kaarten weergegeven zullen worden. Het handigste is om dit voorbeeld gelijk zodanig te verkleinen zodat het veld waarin je speelt nog te goed te zien is. De kaarten zijn van links naar rechts en van boven naar onder genummerd van 1 t/m 12.")
+#functie om de kaarten op tafel in een image te zetten en deze te laten zien in het beeld
+def visualiseer_kaarten(kaarten_op_tafel):
+    os.chdir('C:/Users/' + usernaam + '/Documents/kaarten')   #Zodat je niet telkens het pad naar de afbeeldingen in de kaarten map er bij elke afbeelding bij hoeft te zetten
+    eindafbeelding=Image.new('RGB', (4*100, 3*200))   #een lege afbeelding, met als hoogte 3 maal de hoogte van een enkele kaart en als breedte die van 4 keer een enkele kaart
+    kaarten_op_tafel_img=[]
+    cijfers=['1234.gif', '5678.gif', '9101112.gif']
+    cijfer_img=[]
+    for kaart in kaarten_op_tafel:
+        kaarten_op_tafel_img.append(Image.open(''.join(kaart)+'.gif'))   #de 12 kaarten op tafel worden als afbeelding in een nieuwe lijst gezet
+    for i in range(3):
+        for j in range(4):
+            index=j+4*i   #index wordt 0 tot en  met 11
+            eindafbeelding.paste(kaarten_op_tafel_img[index],(j*100,i*200))  #zet al die 12 afbeeldingen in de lege afbeelding, de j en de i zorgen ervoor dat de juiste afbeelding op de juiste plaats in de lege afbeelding terecht komen
+    for cijfer in cijfers:
+        cijfer_img.append(Image.open(cijfer))
+    for l in range(3):
+        index2=l
+        eindafbeelding.paste(cijfer_img[index2],(0,l*200))
+    eindafbeelding.show()  #toont de afbeelding met de 12 kaarten in beeld
    
 #Om een random volgorde van de kaarten in de stapel te krijgen maken we gebruik van de volgende code:
 random.seed(1)   #een vaste seed voor makkelijker debuggen Deze later verwijderen!!!!!
@@ -79,12 +87,8 @@ for b in range(12):   #een loop waarin twaalf keer de laatste kaart van de lijst
     kaarten_op_tafel_voorbeeld.append(alle_kaarten[-1])
     alle_kaarten.pop()
     bovenste_kaart=alle_kaarten[-1]
-
-print("Welkom bij het programma waar je Set zult spelen tegen de computer. Er volgt nu eerst wat praktische informatie over het programma. Daarna volgen de spelregels en kun je beginnen het spel te spelen.\n\nOm de kaarten van het spel te kunnen visualiseren zul je het mapje genaamd kaarten moeten downloaden en opslaan onder Documents op je computer. Vervolgens om te zorgen dat python het juiste pad vindt naar het mapje waar de kaarten in staan vragen we je om de gebruikersnaam van je verkenner. Deze kun je vinden door in je verkenner rechts te klikken in de balk midden bovenin, je gebruikersnaam staat dan tussen de twee / achter C:/Users (voorbeeld: C:/Users/gebruikersnaam/) en vaak is je gebruikersnaam de eerste 5 letters van je naam zonder hoofdletters")
-usernaam=input("Vul hier a.u.b. je gebruikersnaam van je verkenner in:") #vraag de gebruikersnaam van de speler op zodat we kunnen zorgen dat de plaatjes via het juiste pad worden opgeroepen
-print("\nNu zul je een voorbeeld te zien krijgen van hoe de kaarten weergegeven zullen worden. Het handigste is om dit voorbeeld gelijk zodanig te verkleinen zodat het veld waarin je speelt nog te goed te zien is. De kaarten zijn van links naar rechts en van boven naar onder genummerd van 1 t/m 12.")
 visualiseer_kaarten(kaarten_op_tafel_voorbeeld)
-print("\nNu volgen de spelregels. Deze zijn ook na te lezen in het pdf-bestand.\nHet doel van dit spel is om zo veel mogelijk sets te vinden en zo de computer te verslaan. Op de kaarten staan symbolen met vier verschillende eigenschappen; de kleur (groen, rood, paars), de vorm, de vulling (solide, gestreept of open) en het aantal (1,2,3). Een set bestaat uit drie kaarten en moet aan de volgende eisen voldoen:\nElke eigenschap van de symbolen op de kaart moet of op alle drie de kaarten hetzelfde zijn of op alle drie verschillend. Je krijgt steeds twaalf kaarten te zien waar je een set uit moet herkennen. Mocht er geen set tussen de twaalf getoonde kaarten zitten dan zal de computer drie kaarten verwijderen en drie nieuwe kaarten toevoegen.\nAls je een set gevonden denkt te hebben kun je de nummers van de kaarten die samen mogelijk een set vormen invoeren. Als je een set gevonden hebt krijg je een punt en worden de kaarten van de set vervangen door nieuwe kaarten. Als je na een bepaalde tijd nog geen set hebt gevonden krijgt de computer een punt. Pas goed op met het vinden van een set want, als je kaarten invoert die geen set vormen samen is je tijd ook voorbij en krijgt de computer.\nJe kunt zelf de moeilijkheidsgraad van het spel bepalen. Deze moeilijkheidsgraad bepaalt hoe lang jij de tijd hebt om een set te vinden. Mocht het nou zo zijn dat je het idee hebt dat je echt geen set kunt vinden, maar dat je tijd nog niet om is, dan kun je altijd een willekeurige combinatie van kaarten invoeren. Bedenk hierbij wel dat de computer dan een punt zal krijgen. Om de moeilijkheidsgraad te bepalen kun je hieronder invullen hoeveel tijd je zou willen voor het vinden van een set.")
+print("\nNu volgen de spelregels. Deze zijn ook na te lezen in het pdf-bestand.\nHet doel van dit spel is om zo veel mogelijk sets te vinden en zo de computer te verslaan. Op de kaarten staan symbolen met vier verschillende eigenschappen; de kleur (groen, rood, paars), de vorm, de vulling (solide, gestreept of open) en het aantal (1,2,3). Een set bestaat uit drie kaarten en moet aan de volgende eisen voldoen:\nElke eigenschap van de symbolen op de kaart moet of op alle drie de kaarten hetzelfde zijn of op alle drie verschillend. Je krijgt steeds twaalf kaarten te zien waar je een set uit moet herkennen. Mocht er geen set tussen de twaalf getoonde kaarten zitten dan zal de computer drie kaarten verwijderen en drie nieuwe kaarten toevoegen.\nAls je een set gevonden denkt te hebben kun je de nummers van de kaarten die samen mogelijk een set vormen invoeren. Als je een set gevonden hebt krijg je een punt en worden de kaarten van de set vervangen door nieuwe kaarten. Als je na een bepaalde tijd nog geen set hebt gevonden krijgt de computer een punt. Pas goed op met het vinden van een set, want als je kaarten invoert die geen set vormen samen is je tijd ook voorbij en krijgt de computer een punt.\nJe kunt zelf de moeilijkheidsgraad van het spel bepalen. Deze moeilijkheidsgraad bepaalt hoe lang jij de tijd hebt om een set te vinden. Mocht het nou zo zijn dat je het idee hebt dat je echt geen set kunt vinden, maar dat je tijd nog niet om is, dan kun je altijd een willekeurige combinatie van kaarten invoeren. Bedenk hierbij wel dat de computer dan een punt zal krijgen. Om de moeilijkheidsgraad te bepalen kun je hieronder invullen hoeveel tijd je zou willen voor het vinden van een set.")
 niveau=input("Geef hier aan wat je als moeilijkheidsgraad zou willen (let op: dit moet worden aangegeven in seconden), kies bijvoorbeeld voor 120, 300 of 600 seconden:")
 
 
