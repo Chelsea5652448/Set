@@ -43,3 +43,8 @@ gebruiksaanwijzing
 
 final werkt niet!
 aanpassen: op enter drukken zorgt voor error, foute set invullen zorgt voor error, capset zorgt voor error, aftellen bij hoge getallen gaat verkeerd
+
+to do:
+errors oplossen
+leesbaarheid code verbeteren
+verslag schrijven
