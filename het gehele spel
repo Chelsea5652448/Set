@@ -3,6 +3,13 @@ import time
 from PIL import Image
 import os
 
+print("Welkom bij het programma waar je Set zult spelen tegen de computer. Er volgt nu eerst wat praktische informatie over het programma. Daarna volgen de spelregels en kun je beginnen het spel te spelen.\n\nOm de kaarten van het spel te kunnen visualiseren zul je het mapje genaamd kaarten moeten downloaden en opslaan onder Documents op je computer. Vervolgens om te zorgen dat python het juiste pad vindt naar het mapje waar de kaarten in staan vragen we je om de gebruikersnaam van je verkenner. Deze kun je vinden door in je verkenner rechts te klikken in de balk midden bovenin, je gebruikersnaam staat dan tussen de twee / achter C:/Users (voorbeeld: C:/Users/gebruikersnaam/) en vaak is je gebruikersnaam de eerste 5 letters van je naam zonder hoofdletters")
+usernaam=input("Vul hier a.u.b. je gebruikersnaam van je verkenner in:") #vraag de gebruikersnaam van de speler op zodat we kunnen zorgen dat de plaatjes via het juiste pad worden opgeroepen
+print("\nNu zul je een voorbeeld te zien krijgen van hoe de kaarten weergegeven zullen worden. Het handigste is om dit voorbeeld gelijk zodanig te verkleinen zodat het veld waarin je speelt nog te goed te zien is. De kaarten zijn van links naar rechts en van boven naar onder genummerd van 1 t/m 12.")
+#Hier komt een voorbeeld te staan van de visualisatie van de kaarten
+print("\nNu volgen de spelregels. Deze zijn ook na te lezen in het pdf-bestand.\nHet doel van dit spel is om zo veel mogelijk sets te vinden en zo de computer te verslaan. Op de kaarten staan symbolen met vier verschillende eigenschappen; de kleur (groen, rood, paars), de vorm, de vulling (solide, gestreept of open) en het aantal (1,2,3). Een set bestaat uit drie kaarten en moet aan de volgende eisen voldoen:\nElke eigenschap van de symbolen op de kaart moet of op alle drie de kaarten hetzelfde zijn of op alle drie verschillend. Je krijgt steeds twaalf kaarten te zien waar je een set uit moet herkennen. Mocht er geen set tussen de twaalf getoonde kaarten zitten dan zal de computer drie kaarten verwijderen en drie nieuwe kaarten toevoegen.\nAls je een set gevonden denkt te hebben kun je de nummers van de kaarten die samen mogelijk een set vormen invoeren. Als je een set gevonden hebt krijg je een punt en worden de kaarten van de set vervangen door nieuwe kaarten. Als je na een bepaalde tijd nog geen set hebt gevonden krijgt de computer een punt. Als je kaarten in hebt gevoerd die geen set vormen samen, gaan er tien seconden van je tijd af.")
+
+
 #functie om de kaarten op tafel in een image te zetten en deze te laten zien in het beeld
 def visualiseer_kaarten(kaarten_op_tafel):
     usernaam='naam van user'
