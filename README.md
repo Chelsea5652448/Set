@@ -53,4 +53,10 @@ pdf met kaartenzip, pdf handleiding schrijven
 error enter en error foute set zijn opgelost
 error capset nog testen
 
+Nog kijken naar foutieve invoer.
+
+bij extra tijd, 
+mogelijkheid Minder rondes
+verbeteren code voor willekeurige set.
+
 
