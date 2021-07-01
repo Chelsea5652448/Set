@@ -113,8 +113,8 @@ for b in range(12):   #een loop waarin twaalf keer de laatste kaart van de lijst
 def vind_alle_sets(kaarten_op_tafel):    
     Sets=[]
     for i in range(len(kaarten_op_tafel)):
-        for j in range(i,len(kaarten_op_tafel)):
-            for k in range(j,len(kaarten_op_tafel)):
+        for j in range(i+1,len(kaarten_op_tafel)):
+            for k in range(j+1,len(kaarten_op_tafel)):
                 if i==j or j==k or i==k:
                     pass
                 else:
@@ -128,28 +128,36 @@ def vind_alle_sets(kaarten_op_tafel):
             for j in range(len(Sets[i])):
                 Sets[i][j]+=1
         return(Sets)
+
 def vind_willekeurige_set(kaarten_op_tafel)  :
     Sets=vind_alle_sets(kaarten_op_tafel)
     if Sets!='Dit is een capset':
         willekeurige_set=random.choice(Sets)
         return(willekeurige_set)
 score=(0,0)
+ronde_counter=0
+
 def timer(x):
-    for i in range(0,x):
+    for i in range(-1,x+2):
         if len(stopwatch_timer)>0:
             return()
-        print(x-i)
+        if i-2>=0:
+            print(x-i+2)
         time.sleep(1)
     print('\nde tijd is voorbij, druk op "enter" om door te gaan.\n')
     
-def ronde_spelen(stopwatch_timer,score):      
+def ronde_spelen(stopwatch_timer,score,ronde_counter):      
+    ronde_counter+=1
+    print('Ronde:',ronde_counter)
+    time.sleep(1)
     (punten_speler,punten_computer)=score
     #random.shuffle(kaarten_op_tafel)
     visualiseer_kaarten(kaarten_op_tafel)
     if vind_alle_sets(kaarten_op_tafel)=='Capset':
-        stopwatch_timer.append('stop')
         time.sleep(5)
+        stopwatch_timer.append('stop')
         print('\nDit is een capset, we zullen 3 nieuwe kaarten delen.\n')
+        time.sleep(1)
         mogelijke_set=[1,2,3]
     
     #De speler moet nu een gevonden set invoeren zodat het algoritme kan checken of met klopt.
@@ -160,8 +168,11 @@ def ronde_spelen(stopwatch_timer,score):
         x=vind_willekeurige_set(kaarten_op_tafel)
         invoer_speler = input("Vul hier je gevonden set in (als nummers van de kaarten met komma's ertussen zonder spaties'):")
         stopwatch_timer.append('stop')
+        time.sleep(1)
         if invoer_speler=='' or invoer_speler=='enter':
+            time.sleep(1)
             print('U heeft geen set gevonden, een mogelijke set was:',x,'de computer speelt deze set.')    
+            time.sleep(1)
             mogelijke_set=x
             punten_computer+=1
         else:
@@ -175,18 +186,28 @@ def ronde_spelen(stopwatch_timer,score):
             
             #print(check_set(Set(lijst_mogelijke_set[0]), Set(lijst_mogelijke_set[1]), Set(lijst_mogelijke_set[2])))
             if lijst_mogelijke_set[0]==lijst_mogelijke_set[1] or lijst_mogelijke_set[1]==lijst_mogelijke_set[2] or lijst_mogelijke_set[0]==lijst_mogelijke_set[2]:
+                time.sleep(1)
                 print('\nHelaas, dit is geen set!\n onthoud dat elke kaart slechts eenmaal voor mag komen in een set\n' )
+                time.sleep(1)
                 print('Een mogelijke set was:',x,'de computer speelt deze set.')
                 mogelijke_set=x
                 punten_computer+=1
             elif check_set(Set(lijst_mogelijke_set[0]), Set(lijst_mogelijke_set[1]), Set(lijst_mogelijke_set[2])) == True:
+                time.sleep(1)
                 print("\nJe hebt een set gevonden!\n")
+                time.sleep(1)
                 punten_speler+=1
             else:
+                time.sleep(1)
                 print('\nHelaas, dit is geen set!\n')
-                print('Een mogelijke set was:',x,'de computer speelt deze set.')
+                time.sleep(1)
+                print('Een mogelijke set was:',x,'de computer speelt deze set.\n')
+                time.sleep(1)
                 mogelijke_set=x
                 punten_computer+=1
+    time.sleep(1)
+    print('\nDe ronde is voorbij, de (door de computer) gevonden set wordt zal vervangen worden door 3 nieuwe kaarten.\n')
+    time.sleep(1)
     if len(alle_kaarten)>=3:    
         for j in range(len(mogelijke_set)):
             kaarten_op_tafel.pop(mogelijke_set[j]-j-1)
@@ -194,15 +215,17 @@ def ronde_spelen(stopwatch_timer,score):
     for b in range(3):
         kaarten_op_tafel.append(alle_kaarten[-1])
         alle_kaarten.pop()
-    return((punten_speler,punten_computer))
+    return(((punten_speler,punten_computer),ronde_counter))
         #Verwijder de kaarten uit de lijst met kaarten die op tafel liggen.
 while len(alle_kaarten)>=3:
     time.sleep(1)
     stopwatch_timer=[]
     stopwatch=threading.Thread(target=timer, args=[niveau])
     stopwatch.start()
-    score=ronde_spelen(stopwatch_timer,score)
+    (score,ronde_counter)=ronde_spelen(stopwatch_timer,score,ronde_counter)
+time.sleep(1)
 print('\nDe pot is leeg, het spel is afgelopen.\n')
+time.sleep(1)
 (punten_speler,punten_computer)=score
 if punten_speler>punten_computer:
     print('\nGefeliciteerd, u heeft de computer verslagen met:',score)
