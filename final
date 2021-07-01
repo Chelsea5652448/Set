@@ -1,3 +1,9 @@
+
+
+
+
+
+
 #voor het kloppen van de comments staat import random op regel 8
 import random           #voor het schudden van de 81 kaarten
 import time             #voor de timer
@@ -11,7 +17,7 @@ kleur=['green', 'purple', 'red']      #opties voor kleur
 vorm=['diamond','oval', 'squiggle']   #opties voor vorm
 inhoud=['empty', 'shaded','filled']   #opties voor inhoud
 hoeveelheid=['1','2','3']             #opties voor hoeveelheid
-kaart=[]   #wordt een lijst met telkens 1 enkele kaart erin 
+kaart=[]   #wordt een lijst met telkens 1 unieke kaart met vier eigenschappen erin 
 for i in kleur:
     for j in vorm:
         for k in inhoud:
@@ -129,7 +135,7 @@ print("\nNu volgen de spelregels. Deze zijn ook na te lezen in het pdf-bestand.\
 niveau=input("Geef hier aan wat u als moeilijkheidsgraad zou willen (let op: dit moet worden aangegeven in seconden), kies bijvoorbeeld voor 120, 300 of 600 seconden:")
 niveau=int(niveau)
 
-
+#regel 139 tot en met 204 is een functie die de rondes speelt, het controleert ingevoerde sets, vervangt deze en print tekst in het spel
 def ronde_spelen(stopwatch_timer,score,ronde_teller):      
     ronde_teller+=1   #telt na elke ronde 1 bij de ronde op dat moment op
     print('Ronde:',ronde_teller)
@@ -141,7 +147,7 @@ def ronde_spelen(stopwatch_timer,score,ronde_teller):
         stopwatch_timer.append('stop')   #laat de timer stoppen met aftellen
         print('\nDit is een capset, we zullen 3 nieuwe kaarten delen.\n')
         time.sleep(1)
-        mogelijke_set=[1,2,3]  #deze variabele komt op regel .. terug, daar worden de drie kaarten vervangen door drie nieuwe kaarten
+        mogelijke_set=[1,2,3]  #deze variabele komt op regel 198 terug, daar worden de drie kaarten vervangen door drie nieuwe kaarten
     
     #De speler moet nu een gevonden set invoeren zodat het algoritme kan controleren of deze klopt.
     #De speler voert de drie nummers in van de kaarten waarvan de speler denkt dat het een set is.
@@ -158,15 +164,14 @@ def ronde_spelen(stopwatch_timer,score,ronde_teller):
             mogelijke_set=willekeurige_set
             punten_computer+=1   #de computer krijgt er een punt bij 
         else:
-            invoer_set_van_speler_list= invoer_set_van_speler.split(",")
+            invoer_set_van_speler_lijst= invoer_set_van_speler.split(",")   #maakt een lijst van de invoer van de speler, door de invoer te splitten op basis van komma's
             mogelijke_set=[]
-            for i in range(len(invoer_set_van_speler_list)):
-                mogelijke_set.append(int(invoer_set_van_speler_list[i]))
+            for i in range(len(invoer_set_van_speler_lijst)):
+                mogelijke_set.append(int(invoer_set_van_speler_lijst[i]))   #maakt van de strings integers (de cijfers van de invoer van de speler staan nog een string vorm) en zet de integers in mogelijke_set
             lijst_mogelijke_set=[]
             for j in mogelijke_set:
-                lijst_mogelijke_set.append(kaarten_op_tafel[j-1])
+                lijst_mogelijke_set.append(kaarten_op_tafel[j-1])   #zet de invoer van de speler weer in een nieuwe lijst, maar nu is er van elk getal 1 afgehaald, zodat het weer klopt met de telling die vanaf nul begint met tellen
             
-            #print(check_set(Set(lijst_mogelijke_set[0]), Set(lijst_mogelijke_set[1]), Set(lijst_mogelijke_set[2])))
             if lijst_mogelijke_set[0]==lijst_mogelijke_set[1] or lijst_mogelijke_set[1]==lijst_mogelijke_set[2] or lijst_mogelijke_set[0]==lijst_mogelijke_set[2]:
                 time.sleep(1)
                 print('\nHelaas, dit is geen set!\n onthoud dat elke kaart slechts eenmaal voor mag komen in een set\n' )
@@ -178,7 +183,7 @@ def ronde_spelen(stopwatch_timer,score,ronde_teller):
                 time.sleep(1)
                 print("\nJe hebt een set gevonden!\n")
                 time.sleep(1)
-                punten_speler+=1
+                punten_speler+=1   #de speler krijgt er een punt bij
             else:
                 time.sleep(1)
                 print('\nHelaas, dit is geen set!\n')
@@ -190,31 +195,31 @@ def ronde_spelen(stopwatch_timer,score,ronde_teller):
     time.sleep(1)
     print('\nDe ronde is voorbij, de (door de computer) gevonden set zal vervangen worden door 3 nieuwe kaarten.\n')
     time.sleep(1)
-    for j in range(len(mogelijke_set)): #haalt het getal dat die heeft eruit 
+    for j in range(len(mogelijke_set)): #haalt de drie kaarten uit mogelijke set (dus of de goede set van de speler of de willekeurige set die vaststaat voor de ronde) uit de kaarten op tafel 
         kaarten_op_tafel.pop(mogelijke_set[j]-j-1)
  #Voeg 3 nieuwe kaarten toe aan de lijst met kaarten op tafel.
     for b in range(3):
-        kaarten_op_tafel.append(alle_81_kaarten[-1])
-        alle_81_kaarten.pop()
+        kaarten_op_tafel.append(alle_81_kaarten[-1])   #voegt de drie laatste kaarten uit de lijst van alle_81_kaarten toe aan kaarten op tafel 
+        alle_81_kaarten.pop()   #haalt de drie kaarten die zijn toegevoegd bij kaarten op tafel uit de lijst met alle 81 kaarten (dus uit de stapel worden nieuwe kaarten op tafel gelegd)
     return(((punten_speler,punten_computer),ronde_teller))
-        #Verwijder de kaarten uit de lijst met kaarten die op tafel liggen.
 
 score=(0,0)
 ronde_teller=0
 
-def timer(x):
+#regel 210 tot en met 217 is een functie die de timer regelt
+def timer(x):   #is x tijd? of seconden? want dan kan dat beter de naam worden i.p.v. x
     for i in range(-1,x+2):
-        if len(stopwatch_timer)>0:  #als de lijst stopwach timer niet leeg is stopt die want de return is leeg
+        if len(stopwatch_timer)>0:  #als de lijst stopwach_timer niet leeg is stopt die met aftellen
             return()
-        if i-2>=0:
+        if i-2>=0:   #wat doet dit?
             print(x-i+2)
         time.sleep(1)
     print('\nDe tijd is voorbij, druk op "enter" om door te gaan.\n')
     
-while len(alle_81_kaarten)>=3:
+while len(alle_81_kaarten)>=3:   #while loop loopt zolang er 3 of meer kaarten in de stapel met alle 81 kaarten zit
     time.sleep(1)
-    stopwatch_timer=[]   #zodat elke ronde de stopwathc timer weer leeg is
-    stopwatch=threading.Thread(target=timer, args=[niveau])
+    stopwatch_timer=[]   #zodat elke ronde de stopwathc timer weer een lege lijst is, ander wordt de timer in regel 158 weer gestopt
+    stopwatch=threading.Thread(target=timer, args=[niveau])  #wat doet dit?
     stopwatch.start()
     (score,ronde_teller)=ronde_spelen(stopwatch_timer,score,ronde_teller)
 
@@ -223,6 +228,8 @@ print('\nDe pot is leeg, het spel is afgelopen.\n')
 
 time.sleep(1)
 (punten_speler,punten_computer)=score
+
+#regel 233 tot en met 236 laat de speler weten of hij gewonnen of verloren heeft en met welke score
 if punten_speler>punten_computer:
     print('\nGefeliciteerd, u heeft de computer verslagen met:',score)
 else:
