@@ -162,14 +162,12 @@ def ronde_spelen(stopwatch_timer,score,ronde_teller):
         elif len(invoer_set_van_speler_list)!=3:
             time.sleep(1)
             print('\nU heeft een fout gemaakt in de invoer, zorg dat u 3 getallen tussen 1 en 12 gescheiden met behulp van een , invoert\n De computer speelt',willekeurige_set)
+            time.sleep(2)
             mogelijke_set=willekeurige_set
             punten_computer+=1
-        elif type(invoer_set_van_speler_list[0])!=int or type(invoer_set_van_speler_list[1]!=int or type(invoer_set_van_speler_list[2]!=int)):
+        elif not invoer_set_van_speler_list[0] in ['1','2','3','4','5','6','7','8','9','10','11','12'] or not invoer_set_van_speler_list[1] in ['1','2','3','4','5','6','7','8','9','10','11','12'] or not invoer_set_van_speler_list[2] in ['1','2','3','4','5','6','7','8','9','10','11','12']:
             print('\nU heeft een fout gemaakt in de invoer, zorg dat u 3 getallen tussen 1 en 12 gescheiden met behulp van een , invoert\n De computer speelt',willekeurige_set)
-            mogelijke_set=willekeurige_set
-            punten_computer+=1
-        elif int(invoer_set_van_speler_list[0])<1 or int(invoer_set_van_speler_list[1])<1 or int(invoer_set_van_speler_list[2])<1 or int(invoer_set_van_speler_list[0])>12 or int(invoer_set_van_speler_list[1])>12 or int(invoer_set_van_speler_list[2])>12:
-            print('\nU heeft een fout gemaakt in de invoer, zorg dat u 3 getallen tussen 1 en 12 gescheiden met behulp van een , invoert\n De computer speelt',willekeurige_set)
+            time.sleep(2)
             mogelijke_set=willekeurige_set
             punten_computer+=1
         else:
@@ -198,16 +196,16 @@ def ronde_spelen(stopwatch_timer,score,ronde_teller):
                 print('\nHelaas, dit is geen set aangezien:\n')
                 time.sleep(1)
                 if (not Set(lijst_mogelijke_set[0])<Set(lijst_mogelijke_set[1]) and Set(lijst_mogelijke_set[1])<Set(lijst_mogelijke_set[2])) or (not Set(lijst_mogelijke_set[2])<Set(lijst_mogelijke_set[1]) and Set(lijst_mogelijke_set[0])<Set(lijst_mogelijke_set[1])) or (not Set(lijst_mogelijke_set[0])<Set(lijst_mogelijke_set[1]) and Set(lijst_mogelijke_set[0])<Set(lijst_mogelijke_set[2])):
-                    print('\nDe kleur van de symbolen van de 3 kaarten niet verschillend/hetzelfde zijn.\n')
+                    print('\nDe kleur van de symbolen van de 3 kaarten niet allemaal verschillend/hetzelfde zijn.\n')
                     time.sleep(3)
                 if (not Set(lijst_mogelijke_set[0])<=Set(lijst_mogelijke_set[1]) and Set(lijst_mogelijke_set[1])<=Set(lijst_mogelijke_set[2])) or (not Set(lijst_mogelijke_set[2])<=Set(lijst_mogelijke_set[1]) and Set(lijst_mogelijke_set[0])<=Set(lijst_mogelijke_set[1])) or (not Set(lijst_mogelijke_set[0])<=Set(lijst_mogelijke_set[1]) and Set(lijst_mogelijke_set[0])<=Set(lijst_mogelijke_set[2])):
-                    print('\nDe vorm van de symbolen van de 3 kaarten niet verschillend/hetzelfde zijn.\n')
+                    print('\nDe vorm van de symbolen van de 3 kaarten niet allemaal verschillend/hetzelfde zijn.\n')
                     time.sleep(3)
                 if (not Set(lijst_mogelijke_set[0])>Set(lijst_mogelijke_set[1]) and Set(lijst_mogelijke_set[1])>Set(lijst_mogelijke_set[2])) or (not Set(lijst_mogelijke_set[2])>Set(lijst_mogelijke_set[1]) and Set(lijst_mogelijke_set[0])>Set(lijst_mogelijke_set[1])) or (not Set(lijst_mogelijke_set[0])>Set(lijst_mogelijke_set[1]) and Set(lijst_mogelijke_set[0])>Set(lijst_mogelijke_set[2])):
-                    print('\nDe inhoud van de symbolen van de 3 kaarten niet verschillend/hetzelfde zijn.\n')
+                    print('\nDe inhoud van de symbolen van de 3 kaarten niet allemaal verschillend/hetzelfde zijn.\n')
                     time.sleep(3)
                 if (not Set(lijst_mogelijke_set[0])>=Set(lijst_mogelijke_set[1]) and Set(lijst_mogelijke_set[1])>=Set(lijst_mogelijke_set[2])) or (not Set(lijst_mogelijke_set[2])>=Set(lijst_mogelijke_set[1]) and Set(lijst_mogelijke_set[0])>=Set(lijst_mogelijke_set[1])) or (not Set(lijst_mogelijke_set[0])>=Set(lijst_mogelijke_set[1]) and Set(lijst_mogelijke_set[0])>=Set(lijst_mogelijke_set[2])):
-                    print('\nHet aantal symbolen van de 3 kaarten niet verschillend/hetzelfde zijn.\n')
+                    print('\nHet aantal symbolen van de 3 kaarten niet allemaal verschillend/hetzelfde zijn.\n')
                     time.sleep(3)
                 print('Een mogelijke set was:',willekeurige_set,'de computer speelt deze set.\n')
                 time.sleep(1)
